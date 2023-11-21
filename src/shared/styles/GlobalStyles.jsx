@@ -134,6 +134,16 @@ export const GlobalStyles = styled.createGlobalStyle`
     border-spacing: 0;
   }
 
+  div,
+  section,
+  footer,
+  header,
+  article,
+  aside,
+  nav {
+    box-sizing: border-box;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
