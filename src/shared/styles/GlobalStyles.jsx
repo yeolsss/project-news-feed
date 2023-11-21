@@ -146,10 +146,22 @@ export const GlobalStyles = styled.createGlobalStyle`
 
   :root {
     // 기본 색상 설정
+    --primaryColor: ${({ theme }) => theme.primaryColor};
+    --secondaryColor: ${({ theme }) => theme.secondaryColor};
+    --accentColor: ${({ theme }) => theme.accentColor};
+    --textColor: ${({ theme }) => theme.textColor};
+    --backgroundColor1: ${({ theme }) => theme.backgroundColor1};
+    --backgroundColor2: ${({ theme }) => theme.backgroundColor2};
+    --backgroundColor3: ${({ theme }) => theme.backgroundColor3};
   }
 
   body {
     width: 100vw;
+    background-color: var(--backgroundColor1);
+    color: var(--textColor);
+    transition:
+      background-color 0.3s ease-in,
+      color 0.3s ease-in;
   }
   #root {
     width: 100%;

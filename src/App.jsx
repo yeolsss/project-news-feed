@@ -1,20 +1,30 @@
 import styled from "styled-components";
-import Router from "./shared/Router";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "./shared/Router";
+import { GlobalFonts } from "./shared/styles/GlobalFonts";
+import { GlobalStyles } from "./shared/styles/GlobalStyles";
+import { ThemeProvider } from "styled-components";
+import { useSelector } from "react-redux";
+import { themeSelector } from "./redux/slice/theme.slice";
+import { darkTheme, lightTheme } from "./shared/theme";
 
 function App() {
+  const { theme } = useSelector(themeSelector);
+
   return (
-    <BrowserRouter>
+    <ThemeProvider theme={theme ? lightTheme : darkTheme}>
+      <GlobalFonts />
+      <GlobalStyles />
       <StContainer>
         <Router />
       </StContainer>
-    </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
 const StContainer = styled.div`
-  box-shadow: inset 0 0 20px red;
   max-width: 100rem;
   margin: 0 auto;
+  background-color: var(--backgroundColor3);
+  transition: background-color 0.3s ease-in-out;
 `;
 export default App;
