@@ -1,7 +1,15 @@
 import styled from "styled-components";
+import Router from "./shared/Router";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
-  return <StContainer>dfd</StContainer>;
+  return (
+    <BrowserRouter>
+      <StContainer>
+        <Router />
+      </StContainer>
+    </BrowserRouter>
+  );
 }
 
 const StContainer = styled.div`

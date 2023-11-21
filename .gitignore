@@ -76,4 +76,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-.nev
+.env
