@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMutation } from "react-query";
 import {
   checkEmailValidation,
@@ -6,18 +6,11 @@ import {
   printError,
 } from "../../common/util";
 
+import { useNavigate } from "react-router-dom";
 import { setUser } from "../../api/firebase";
 import * as St from "./joinMain.style";
 
 function JoinMain() {
-  const { mutate, isLoading, isError, error } = useMutation(setUser, {
-    onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      console.log(error);
-    },
-  });
   const joinStatesInit = {
     id: "",
     password: "",
@@ -45,6 +38,26 @@ function JoinMain() {
   const passwordCheckRef = useRef(null);
   const nameRef = useRef(null);
   const nicknameRef = useRef(null);
+
+  const navigate = useNavigate();
+  //TODO: 회원가입 시 로딩, 에러 처리
+  const { mutate, isLoading, error } = useMutation(setUser, {
+    onSuccess: (data) => {
+      const { uid } = data.user;
+      alert("회원가입이 완료되었습니다.");
+      navigate("/");
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+
+  useEffect(() => {
+    return () => {
+      setJoinStates(joinStatesInit);
+      setValidDataStates(validDataStatesInit);
+    };
+  }, []);
 
   // input event
   const handleOnChangeInput = (e, type) => {
@@ -140,11 +153,8 @@ function JoinMain() {
       return;
     }
 
-    try {
-      mutate({ id, password });
-    } catch (error) {
-      console.log(error);
-    }
+    // react-query를 사용하여 firebase에 회원가입
+    mutate({ id, password });
   };
 
   return (
@@ -200,11 +210,12 @@ function JoinMain() {
         <St.JoinInfoSection>
           <St.JoinInfoDiv>
             <input
+              id="agree"
               type={"checkbox"}
               value={joinStates.check}
               onChange={handleOnChangeCheckbox}
             />
-            <span>개인정보 동의</span>
+            <label htmlFor="agree">개인정보 동의</label>
           </St.JoinInfoDiv>
           <St.JoinButtonGroup>
             <St.JoinButton>회원가입</St.JoinButton>

@@ -14,6 +14,7 @@ export const JoinHeaderSection = styled.header`
   > h1 {
     line-height: 27.2px; /* 113.333% */
     letter-spacing: 0.24px;
+    color: #ffffff;
   }
   > h1:last-child {
     text-align: right;

@@ -38,7 +38,7 @@ export const JoinInfoDiv = styled.section`
     height: 2rem;
   }
 
-  > span {
+  > label {
     font-size: 1.6rem;
     margin-left: 1rem;
     margin-top: 0.6rem;
@@ -54,10 +54,16 @@ export const JoinButton = styled.button`
   border: none;
   height: 10rem;
   background-color: var(--accentColor);
+  opacity: 0.7;
   font-size: 2.4rem;
   color: var(--textColor);
   width: 100%;
   margin-top: 3rem;
   border-radius: 0.5rem;
   cursor: pointer;
+  transition: opacity 0.3s ease-in;
+  color: #ffffff;
+  &:hover {
+    opacity: 1;
+  }
 `;
