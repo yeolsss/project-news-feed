@@ -5,8 +5,10 @@ import * as St from "./join.style";
 function Join() {
   return (
     <St.JoinContainer>
-      <JoinHeader />
-      <JoinMain />
+      <St.JoinSection>
+        <JoinHeader />
+        <JoinMain />
+      </St.JoinSection>
     </St.JoinContainer>
   );
 }
