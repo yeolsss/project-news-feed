@@ -18,7 +18,7 @@ import { JoinButton } from "../joinMan/joinMain.style";
 import * as St from "./loginModal.style";
 
 function LoginModal() {
-  const { loginModal: isModalOpen } = useSelector(selectLoginModal);
+  const loginModal = useSelector(selectLoginModal);
 
   const [userInfoStates, setUserInfoStates] = useState({
     id: "",
@@ -97,8 +97,22 @@ function LoginModal() {
     await loginMutation.mutateAsync({ id, password });
   };
 
+  const handleOnClickCloseModal = (e, type) => {
+    // 클릭된 요소가 모달의 바깥쪽이라면 모달을 닫는다.
+    if (type === "modal") {
+      if (e.target === e.currentTarget) {
+        dispatch(closeLoginModal());
+      }
+      return;
+    }
+    dispatch(closeLoginModal());
+  };
+
   return (
-    <St.LoginModalWrapper $isModalOpen={isModalOpen}>
+    <St.LoginModalWrapper
+      $isModalOpen={loginModal}
+      onClick={(e) => handleOnClickCloseModal(e, "modal")}
+    >
       <St.LoginWrapper>
         <div>
           <JoinHeader />
@@ -123,6 +137,11 @@ function LoginModal() {
             <JoinButton>로그인</JoinButton>
           </St.LoginForm>
         </div>
+        <St.ModalCloseButton
+          onClick={(e) => handleOnClickCloseModal(e, "button")}
+        >
+          <div></div>
+        </St.ModalCloseButton>
       </St.LoginWrapper>
     </St.LoginModalWrapper>
   );

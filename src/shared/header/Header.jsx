@@ -1,5 +1,6 @@
 import { CiDark, CiLight } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
+import { openLoginModal } from "../../redux/slice/loginModal.slice";
 import { themeSelector, toggleTheme } from "../../redux/slice/theme.slice";
 import * as St from "./header.style";
 
@@ -9,6 +10,10 @@ function Header() {
 
   const handleOnClickThemeToggle = () => {
     dispatch(toggleTheme());
+  };
+
+  const handleOnClickLogin = () => {
+    dispatch(openLoginModal());
   };
   return (
     <St.LayoutHeader>
@@ -24,7 +29,9 @@ function Header() {
         <St.ThemeButton onClick={handleOnClickThemeToggle}>
           {theme ? <CiLight /> : <CiDark />}
         </St.ThemeButton>
-        <St.HeaderLoginButton>Login</St.HeaderLoginButton>
+        <St.HeaderLoginButton onClick={handleOnClickLogin}>
+          Login
+        </St.HeaderLoginButton>
       </St.HeaderButtonWrapper>
     </St.LayoutHeader>
   );
