@@ -6,7 +6,7 @@ function JoinHeader() {
     <St.JoinHeaderSection>
       <h1>
         <St.HeaderConst>const</St.HeaderConst> itNews{" "}
-        <St.HeaderEqual>=</St.HeaderEqual> docuemtn.
+        <St.HeaderEqual>=</St.HeaderEqual> document.
       </h1>
       <h1>
         getElementById(<St.HeaderString>"itNews"</St.HeaderString>);

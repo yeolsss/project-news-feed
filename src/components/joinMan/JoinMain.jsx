@@ -8,6 +8,7 @@ import {
 
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../../api/firebase";
+import { Input } from "../common/Inputs";
 import * as St from "./joinMain.style";
 
 function JoinMain() {
@@ -44,6 +45,9 @@ function JoinMain() {
   const { mutate, isLoading, error } = useMutation(setUser, {
     onSuccess: (data) => {
       const { uid } = data.user;
+      // 로그인 상태로 변경
+      // firebase에 프로필 저장
+      // 메인 페이지로 이동
       alert("회원가입이 완료되었습니다.");
       navigate("/");
     },
@@ -62,30 +66,8 @@ function JoinMain() {
   // input event
   const handleOnChangeInput = (e, type) => {
     const { value } = e.target;
-    switch (type) {
-      case "id":
-        setJoinStates({ ...joinStates, id: value });
-        setValidDataStates({ ...validDataStates, id: false });
-        break;
-      case "password":
-        setJoinStates({ ...joinStates, password: value });
-        setValidDataStates({ ...validDataStates, password: false });
-        break;
-      case "passwordCheck":
-        setJoinStates({ ...joinStates, passwordCheck: value });
-        setValidDataStates({ ...validDataStates, passwordCheck: false });
-        break;
-      case "name":
-        setJoinStates({ ...joinStates, name: value });
-        setValidDataStates({ ...validDataStates, name: false });
-        break;
-      case "nickname":
-        setJoinStates({ ...joinStates, nickname: value });
-        setValidDataStates({ ...validDataStates, nickname: false });
-        break;
-      default:
-        break;
-    }
+    setJoinStates((prev) => ({ ...prev, [type]: value }));
+    setValidDataStates((prev) => ({ ...prev, [type]: false }));
   };
 
   // checkbox event
@@ -93,11 +75,12 @@ function JoinMain() {
     const { checked } = e.target;
     setJoinStates({ ...joinStates, check: checked });
   };
+
   // submit event
   const handleOnSubmitJoin = async (e) => {
     e.preventDefault();
     const { id, password, passwordCheck, name, nickname, check } = joinStates;
-    const validDateResult = checkValidation(
+    const validDataResult = checkValidation(
       id,
       password,
       passwordCheck,
@@ -106,8 +89,8 @@ function JoinMain() {
     );
 
     // 빈값 체크
-    if (validDateResult.result) {
-      switch (validDateResult.index) {
+    if (validDataResult.result) {
+      switch (validDataResult.index) {
         case 0:
           printError("아이디를 입력해 주세요.", idRef);
           setValidDataStates({ ...validDataStates, id: true });
@@ -227,22 +210,3 @@ function JoinMain() {
 }
 
 export default JoinMain;
-
-export const Input = ({
-  type,
-  placeholder,
-  inputRef,
-  onChange,
-  inputType,
-  $error,
-}) => {
-  return (
-    <St.JoinInput
-      type={type}
-      placeholder={placeholder}
-      ref={inputRef}
-      onChange={(e) => onChange(e, inputType)}
-      $error={$error}
-    />
-  );
-};

@@ -6,6 +6,7 @@
 export const checkValidation = (...value) => {
   let result = { result: false, index: 0 };
   for (let i = 0; i < value.length; i++) {
+    console.log(value[i]);
     if (value[i].trim() === "") {
       result.result = true;
       result.index = i;
@@ -33,7 +34,7 @@ export const checkEmailValidation = (email) => {
  */
 export const printError = (msg, ref) => {
   alert(msg);
-  ref !== null ?? ref.current.focus();
+  ref.current && ref.current.focus();
 };
 
 /**
