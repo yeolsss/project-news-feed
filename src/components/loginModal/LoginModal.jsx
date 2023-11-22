@@ -1,11 +1,17 @@
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useMutation } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
+import { loginFirebase } from "../../api/firebase";
 import {
   checkEmailValidation,
   checkValidation,
   printError,
 } from "../../common/util";
-import { selectLoginModal } from "../../redux/slice/loginModal.slice";
+import { setLoading } from "../../redux/slice/loadingModal.slice";
+import {
+  closeLoginModal,
+  selectLoginModal,
+} from "../../redux/slice/loginModal.slice";
 import { Input } from "../common/Inputs";
 import JoinHeader from "../joinHeader/JoinHeader";
 import { JoinButton } from "../joinMan/joinMain.style";
@@ -26,6 +32,8 @@ function LoginModal() {
   const idRef = useRef(null);
   const passwordRef = useRef(null);
 
+  const dispatch = useDispatch();
+
   const onChangeUserInfo = (e, type) => {
     const { value } = e.target;
     setUserInfoStates((prev) => ({
@@ -38,7 +46,28 @@ function LoginModal() {
     }));
   };
 
-  const handleOnSubmitLogin = (e) => {
+  const loginMutation = useMutation(
+    async ({ id, password }) => {
+      await loginFirebase({ id, password });
+    },
+    {
+      onMutate: () => {
+        dispatch(setLoading(true));
+      },
+      onSuccess: () => {
+        alert("로그인에 성공하였습니다.");
+      },
+      onError: () => {
+        alert("아이디 및 비밀번호를 다시 확인해주세요.");
+      },
+      onSettled: () => {
+        dispatch(setLoading(false));
+        dispatch(closeLoginModal());
+      },
+    }
+  );
+
+  const handleOnSubmitLogin = async (e) => {
     e.preventDefault();
     const { id, password } = userInfoStates;
 
@@ -64,6 +93,8 @@ function LoginModal() {
       setValidDataStates({ ...validDataStates, id: true });
       return;
     }
+
+    await loginMutation.mutateAsync({ id, password });
   };
 
   return (
@@ -91,10 +122,6 @@ function LoginModal() {
             <St.JoinLink to="/join">회원가입</St.JoinLink>
             <JoinButton>로그인</JoinButton>
           </St.LoginForm>
-          <div>
-            <Button text={"google Login"} />
-            <Button text={"github Login"} />
-          </div>
         </div>
       </St.LoginWrapper>
     </St.LoginModalWrapper>

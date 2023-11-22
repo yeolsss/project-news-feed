@@ -9,7 +9,7 @@ import {
 
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setUser } from "../../api/firebase";
+import { loginFirebase, setUser } from "../../api/firebase";
 import { db } from "../../common/firebase";
 import { setLoading } from "../../redux/slice/loadingModal.slice";
 import { Input } from "../common/Inputs";
@@ -63,7 +63,9 @@ function JoinMain() {
     onError: (error) => {
       console.error(error);
     },
-    onSettled: () => {
+    onSettled: async () => {
+      // 회원 가입 후 자동 로그인
+      await loginFirebase(joinStates);
       dispatch(setLoading(false));
       navigate("/");
     },
