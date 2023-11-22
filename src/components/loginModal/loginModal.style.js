@@ -10,6 +10,7 @@ export const LoginModalWrapper = styled.div`
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
+  /* display: ${({ $isModalOpen }) => ($isModalOpen ? "flex" : "none")}; */
   display: flex;
 `;
 
@@ -48,4 +49,6 @@ export const JoinLink = styled(Link)`
 
 export const SnsButton = styled(JoinButton)`
   background-color: var(--backgroundColor2);
+  font-weight: 700;
+  color: var(--textColor1);
 `;

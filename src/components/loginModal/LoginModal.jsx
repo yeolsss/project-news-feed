@@ -1,15 +1,19 @@
 import React, { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   checkEmailValidation,
   checkValidation,
   printError,
 } from "../../common/util";
+import { selectLoginModal } from "../../redux/slice/loginModal.slice";
 import { Input } from "../common/Inputs";
 import JoinHeader from "../joinHeader/JoinHeader";
 import { JoinButton } from "../joinMan/joinMain.style";
 import * as St from "./loginModal.style";
 
 function LoginModal() {
+  const { loginModal: isModalOpen } = useSelector(selectLoginModal);
+
   const [userInfoStates, setUserInfoStates] = useState({
     id: "",
     password: "",
@@ -39,7 +43,6 @@ function LoginModal() {
     const { id, password } = userInfoStates;
 
     const validDataResult = checkValidation(id, password);
-    console.log(idRef, passwordRef);
     // 빈값 체크
     if (validDataResult.result) {
       switch (validDataResult.index) {
@@ -64,7 +67,7 @@ function LoginModal() {
   };
 
   return (
-    <St.LoginModalWrapper>
+    <St.LoginModalWrapper $isModalOpen={isModalOpen}>
       <St.LoginWrapper>
         <div>
           <JoinHeader />

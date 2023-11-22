@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { doc, setDoc } from "firebase/firestore";
+import { useRef, useState } from "react";
 import { useMutation } from "react-query";
 import {
   checkEmailValidation,
@@ -6,8 +7,11 @@ import {
   printError,
 } from "../../common/util";
 
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../../api/firebase";
+import { db } from "../../common/firebase";
+import { setLoading } from "../../redux/slice/loadingModal.slice";
 import { Input } from "../common/Inputs";
 import * as St from "./joinMain.style";
 
@@ -41,27 +45,31 @@ function JoinMain() {
   const nicknameRef = useRef(null);
 
   const navigate = useNavigate();
-  //TODO: 회원가입 시 로딩, 에러 처리
-  const { mutate, isLoading, error } = useMutation(setUser, {
-    onSuccess: (data) => {
+
+  const { mutate } = useMutation(setUser, {
+    onMutate: () => {
+      dispatch(setLoading(true));
+    },
+    onSuccess: async (data) => {
       const { uid } = data.user;
-      // 로그인 상태로 변경
-      // firebase에 프로필 저장
-      // 메인 페이지로 이동
+
+      await setDoc(doc(db, "user_info", uid), {
+        uid,
+        name: joinStates.name,
+        nickname: joinStates.nickname,
+      });
       alert("회원가입이 완료되었습니다.");
-      navigate("/");
     },
     onError: (error) => {
       console.error(error);
     },
+    onSettled: () => {
+      dispatch(setLoading(false));
+      navigate("/");
+    },
   });
 
-  useEffect(() => {
-    return () => {
-      setJoinStates(joinStatesInit);
-      setValidDataStates(validDataStatesInit);
-    };
-  }, []);
+  const dispatch = useDispatch();
 
   // input event
   const handleOnChangeInput = (e, type) => {
