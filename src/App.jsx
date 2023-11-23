@@ -9,14 +9,15 @@ import { darkTheme, lightTheme } from "./shared/theme";
 
 function App() {
   const { theme } = useSelector(themeSelector);
+
   return (
     <ThemeProvider theme={theme ? lightTheme : darkTheme}>
       <GlobalFonts />
       <GlobalStyles />
       <StContainer>
         <Router />
-        <LoadingModal />
       </StContainer>
+      <LoadingModal />
     </ThemeProvider>
   );
 }
