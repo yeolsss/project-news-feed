@@ -21,12 +21,27 @@ function MyProfile() {
     fetchData();
   }, []);
 
+  const updateData = async (e) => {
+    const infoRef = doc(db, "editedMyInfo", uid);
+    await updateData(infoRef, { ...data });
+
+    setEditedMyInfo((prev) => {
+      return prev.map((el) => {
+        if (el.uid === data.uid) {
+          return { ...el };
+        } else {
+          return el;
+        }
+      });
+    });
+  };
+
   // 기본 데이터
   const TestData = {
     uid: "1",
     name: "이하빈",
-    img_storage: "😉",
-    nick_name: "I Like MILK",
+    imgstorage: "😉",
+    nickname: "I Like MILK",
     greeting: "안녕하세요 반가워요 잘 부탁드립니다.",
   };
   // 수정중일때

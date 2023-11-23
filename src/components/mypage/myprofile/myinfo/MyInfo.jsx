@@ -31,10 +31,10 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
           maxLength={10}
           onChange={handleChangeEditText}
         >
-          {editedMyInfo.nick_name}
+          {editedMyInfo.nickname}
         </St.MyNameEditingInput>
       ) : (
-        <St.MyNickName>{editedMyInfo.nick_name}</St.MyNickName>
+        <St.MyNickName>{editedMyInfo.nickname}</St.MyNickName>
       )}
     </St.MyInfoContainer>
   );

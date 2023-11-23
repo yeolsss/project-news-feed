@@ -1,9 +1,11 @@
-import { default as MyPosts } from "../../components/mypost/mypost";
+import MyProfile from "../../components/mypage/myprofile/MyProfile";
+import MyPosts from "../../components/mypost/MyPost";
 import * as St from "./myPage.style";
 
 function MyPage() {
   return (
     <St.MyPageContainer>
+      <MyProfile />
       <MyPosts />
     </St.MyPageContainer>
   );
