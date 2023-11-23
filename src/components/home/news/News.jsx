@@ -51,6 +51,7 @@ function News() {
                 <St.Time>{n.created_at}</St.Time>
               </div>
             </St.StProfileArea>
+
             <St.NewsArea>
               <div>
                 <St.Title>{n.title}</St.Title>
