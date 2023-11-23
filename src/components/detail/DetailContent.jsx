@@ -1,22 +1,31 @@
-import { collection, getDocs } from "firebase/firestore";
-import React, { useEffect } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { db } from "../../common/firebase";
+import { useRoot } from "../../context/root.context";
 import profileImg from "./assets/profileImg.jpg";
 import * as St from "./detailContent.style";
 
 function DetailContent() {
+  const { userInfo } = useRoot();
+  const { uid, name, nickname, email } = userInfo;
+  const newsObj = {
+    title: "",
+    content: "",
+    tag_name_list: [],
+    image_path: "",
+    created_at: "",
+    updated_at: "",
+    uid: "",
+  };
+  const [newsData, setNewsData] = useState(newsObj);
   useEffect(() => {
-    const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, "news_feed"));
-      querySnapshot.forEach((doc) => {
-        const data = {
-          id: doc.id,
-          ...doc.data(),
-        };
-        console.log(data);
-      });
-    };
-    fetchData();
+    getDoc(doc(db, "news_feed", "npELLfSPH2eY2wDJwvRh")).then((doc) => {
+      if (doc.exists()) {
+        setNewsData({ ...doc.data() });
+      } else {
+        console.log("No such document!");
+      }
+    });
   }, []);
 
   return (
@@ -24,14 +33,21 @@ function DetailContent() {
       <St.Container>
         <St.HeaderBox>
           <St.HeaderImg src={profileImg} alt="" />
-          <St.Name>hyewon</St.Name>
+          <St.Name>
+            {nickname} ({name})
+          </St.Name>
         </St.HeaderBox>
         <St.ContentBox>
-          <St.Date>날짜</St.Date>
+          <St.Date>날짜 {newsData.created_at}</St.Date>
 
-          <St.Title>제목</St.Title>
-          <St.Content>내용</St.Content>
-          <St.Tag>#해외</St.Tag>
+          <St.Title>{newsData.title}</St.Title>
+          <St.Content>{newsData.content}</St.Content>
+          <St.Tag>
+            {newsData.tag_name_list.length &&
+              newsData.tag_name_list.map((tag, index) => (
+                <St.TagItem key={tag + index}>{tag}</St.TagItem>
+              ))}
+          </St.Tag>
 
           <St.ButtonBox>
             <St.SelectButton>수정</St.SelectButton>

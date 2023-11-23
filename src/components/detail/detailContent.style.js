@@ -63,6 +63,7 @@ export const SelectButton = styled.button`
   border-radius: 1rem;
   cursor: pointer;
 `;
+export const TagItem = styled.p``;
 export const ButtonBox = styled.div`
   display: flex;
   margin-left: auto;

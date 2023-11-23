@@ -1,12 +1,13 @@
 import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../common/firebase";
+import { auth, db } from "../common/firebase";
 
 // context 초기화
 const initialState = {
   isLogin: false,
   logout: () => {},
-  userInfo: { email: "", uid: "" },
+  userInfo: { email: "", uid: "", name: "", nickname: "" },
 };
 
 export const RootContext = createContext(initialState);
@@ -20,8 +21,22 @@ export function RootProvider({ children }) {
       if (user) {
         const { email, uid } = user;
         // 사용자가 로그인한 상태
-        setUser({ email, uid });
         setIsLogin(true);
+
+        // 로그인 한 사용자 이름 가져와
+        getDoc(doc(db, "user_info", uid)).then((docSnap) => {
+          if (docSnap.exists()) {
+            setUser({
+              email,
+              uid,
+              name: docSnap.data().name,
+              nickname: docSnap.data().nickname,
+            });
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        });
       } else {
         // 사용자가 로그아웃한 상태
         setIsLogin(false);
