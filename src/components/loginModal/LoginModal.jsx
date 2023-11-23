@@ -101,11 +101,11 @@ function LoginModal() {
     // 클릭된 요소가 모달의 바깥쪽이라면 모달을 닫는다.
     if (type === "modal") {
       if (e.target === e.currentTarget) {
-        dispatch(closeLoginModal());
+        // dispatch(closeLoginModal());
       }
       return;
     }
-    dispatch(closeLoginModal());
+    // dispatch(closeLoginModal());
   };
 
   return (
