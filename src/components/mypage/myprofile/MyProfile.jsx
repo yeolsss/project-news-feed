@@ -1,6 +1,6 @@
 import { collection, getDocs, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db } from "././firebase.js";
+import { db } from "../../../common/firebase";
 import * as St from "./myProfile.style";
 import MyGreeting from "./mygreeting/MyGreeting";
 import MyInfo from "./myinfo/MyInfo";
