@@ -13,7 +13,7 @@ export const Router = () => (
         <Route path="/" element={<Home />} />
         <Route path="/my-page" element={<MyPage />} />
         <Route path="/write" element={<Write />} />
-        <Route path="detail/:id" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail />} />
       </Route>
       <Route path="/join" element={<Join />} />
     </Routes>
