@@ -5,7 +5,10 @@ import React, { useState } from "react";
 import { db } from "../../common/firebase";
 import MainContainer from "../../components/WriteContainer/maincontainer/Main";
 import TitleContainer from "../../components/WriteContainer/titlecontainer/Title";
+import AddHashtag from "../../components/addhashtag/AddHashtag";
 import Registeration from "../../components/registeration/Registeration";
+import UploadPhoto from "../../components/uploadphoto/UploadPhoto";
+
 import { WriteContainer } from "./write.style";
 
 function Write() {
@@ -34,7 +37,9 @@ function Write() {
       <WriteContainer>
         <TitleContainer setTitle={setTitle} />
         <MainContainer setContent={setContent} />
-        <Registeration onClick={handleRegister}></Registeration>
+        <UploadPhoto />
+        <AddHashtag />
+        <Registeration />
       </WriteContainer>
     </>
   );

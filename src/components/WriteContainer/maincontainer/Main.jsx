@@ -1,8 +1,5 @@
 // MainContainer.jsx
 import React, { useState } from "react";
-import AddHashtag from "../../addhashtag/AddHashtag";
-import Registeration from "../../registeration/Registeration";
-import UploadPhoto from "../uploadphoto/UploadPhoto";
 import { Main, Maincontent } from "./Main.style";
 
 function MainContainer() {
@@ -19,11 +16,7 @@ function MainContainer() {
         value={content}
         onChange={ContentChange}
       />
-      <Maincontent>
-        <UploadPhoto />
-        <AddHashtag />
-        <Registeration />
-      </Maincontent>
+      <Maincontent></Maincontent>
     </Main>
   );
 }
