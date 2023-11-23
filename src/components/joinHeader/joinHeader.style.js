@@ -11,6 +11,7 @@ export const JoinHeaderSection = styled.header`
   justify-content: center;
   padding: 0 2rem;
   margin: 0 auto;
+  cursor: pointer;
   > h1 {
     line-height: 27.2px; /* 113.333% */
     letter-spacing: 0.24px;

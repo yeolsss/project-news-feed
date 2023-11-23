@@ -47,6 +47,7 @@ function DetailContent() {
       }).then(() => {
         setIsUpdate(false);
         setNewsData({ ...updateNewsData });
+        alert("수정되었습니다.");
       });
     }
   };
@@ -62,7 +63,7 @@ function DetailContent() {
     const tagList = value.split(",");
     setUpdateNewsData({ ...updateNewsData, tag_name_list: tagList });
   };
-  useEffect(() => {}, [updateNewsData]);
+
   useEffect(() => {
     getDoc(doc(db, "news_feed", newsId)).then((doc) => {
       if (doc.exists()) {
