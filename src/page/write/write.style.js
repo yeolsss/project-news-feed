@@ -1,3 +1,4 @@
 import { styled } from "styled-components";
-
-export const WriteContainer = styled.div``;
+export const WriteContainer = styled.div`
+  /* display: flex; */
+`;
