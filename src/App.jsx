@@ -1,21 +1,21 @@
-import styled from "styled-components";
+import { useSelector } from "react-redux";
+import styled, { ThemeProvider } from "styled-components";
+import LoadingModal from "./components/loadingModal/LoadingModal";
+import { themeSelector } from "./redux/slice/theme.slice";
 import { Router } from "./shared/Router";
 import { GlobalFonts } from "./shared/styles/GlobalFonts";
 import { GlobalStyles } from "./shared/styles/GlobalStyles";
-import { ThemeProvider } from "styled-components";
-import { useSelector } from "react-redux";
-import { themeSelector } from "./redux/slice/theme.slice";
 import { darkTheme, lightTheme } from "./shared/theme";
 
 function App() {
   const { theme } = useSelector(themeSelector);
-
   return (
     <ThemeProvider theme={theme ? lightTheme : darkTheme}>
       <GlobalFonts />
       <GlobalStyles />
       <StContainer>
         <Router />
+        <LoadingModal />
       </StContainer>
     </ThemeProvider>
   );
