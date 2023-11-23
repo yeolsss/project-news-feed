@@ -6,10 +6,6 @@ function NewsList() {
   return (
     <St.List>
       <News />
-      <News />
-      <News />
-      <News />
-      <News />
     </St.List>
   );
 }
