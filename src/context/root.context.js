@@ -7,7 +7,7 @@ import { auth, db } from "../common/firebase";
 const initialState = {
   isLogin: false,
   logout: () => {},
-  userInfo: { email: "", uid: "", name: "", nickname: "" },
+  userInfo: { email: "", uid: "", name: "", nickname: "", imgStorage: "" },
 };
 
 export const RootContext = createContext(initialState);
@@ -31,6 +31,7 @@ export function RootProvider({ children }) {
               uid,
               name: docSnap.data().name,
               nickname: docSnap.data().nickname,
+              imgStorage: docSnap.data().img_storage,
             });
           } else {
             // doc.data() will be undefined in this case

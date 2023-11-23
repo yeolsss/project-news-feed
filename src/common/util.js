@@ -45,3 +45,12 @@ export const printError = (msg, ref) => {
 export const passwordCheck = (password, passwordCheck) => {
   return password === passwordCheck;
 };
+
+export const getDate = (setDate = "") => {
+  const today = setDate === "" ? new Date() : new Date(setDate);
+
+  const year = String(today.getFullYear()); // 년도
+  const month = String(today.getMonth() + 1).padStart(2, "0"); // 월
+  const date = String(today.getDate()).padStart(2, "0"); // 날짜
+  return `${year}.${month}.${date}`;
+};
