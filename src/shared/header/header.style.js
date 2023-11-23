@@ -72,6 +72,7 @@ export const HeaderLoginButton = styled.button`
   opacity: 0.8;
   cursor: pointer;
   transition: opacity 0.3s ease-in;
+  margin-right: 1rem;
   &:hover {
     opacity: 1;
   }

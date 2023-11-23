@@ -7,7 +7,7 @@ import { openLoginModal } from "../../redux/slice/loginModal.slice";
 import { themeSelector, toggleTheme } from "../../redux/slice/theme.slice";
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as St from "./header.style";
 
 function Header() {
@@ -17,12 +17,18 @@ function Header() {
   // 요놈 가져다 쓰면 로그인 됐는지 알 수 있다.
   const { isLogin, logout, userInfo } = useRoot();
 
+  const navigate = useNavigate();
+
   const handleOnClickThemeToggle = () => {
     dispatch(toggleTheme());
   };
 
-  const handleOnClickLogin = () => {
-    dispatch(openLoginModal());
+  const handleOnClickLogin = (type) => {
+    if (type === "login") {
+      dispatch(openLoginModal());
+    } else {
+      navigate("/join");
+    }
   };
 
   const handelOnClickDropDown = () => {
@@ -49,9 +55,14 @@ function Header() {
           {theme ? <CiLight /> : <CiDark />}
         </St.HeaderButton>
         {!isLogin ? (
-          <St.HeaderLoginButton onClick={handleOnClickLogin}>
-            Login
-          </St.HeaderLoginButton>
+          <>
+            <St.HeaderLoginButton onClick={() => handleOnClickLogin("login")}>
+              Login
+            </St.HeaderLoginButton>
+            <St.HeaderLoginButton onClick={() => handleOnClickLogin("signUp")}>
+              signUp
+            </St.HeaderLoginButton>
+          </>
         ) : (
           <>
             <St.HeaderButton onClick={handelOnClickDropDown}>
