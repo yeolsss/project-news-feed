@@ -172,6 +172,7 @@ export const GlobalStyles = styled.createGlobalStyle`
     transition:
       background-color 0.3s ease-in,
       color 0.3s ease-in;
+    position: relative;
   }
   #root {
     width: 100%;
