@@ -1,23 +1,22 @@
-import { collection, getDocs } from "firebase/firestore";
-import React, { useEffect } from "react";
-import { db } from "../../common/firebase";
+import React from "react";
+// import { db } from "../../common/firebase";
 import profileImg from "./assets/profileImg.jpg";
 import * as St from "./detailContent.style";
 
 function DetailContent() {
-  useEffect(() => {
-    const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, "news_feed"));
-      querySnapshot.forEach((doc) => {
-        const data = {
-          id: doc.id,
-          ...doc.data(),
-        };
-        console.log(data);
-      });
-    };
-    fetchData();
-  }, []);
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       const querySnapshot = await getDocs(collection(db, "news_feed"));
+  //       querySnapshot.forEach((doc) => {
+  //         const data = {
+  //           id: doc.id,
+  //           ...doc.data(),
+  //         };
+  //         console.log(data);
+  //       });
+  //     };
+  //     fetchData();
+  //   }, []);
 
   return (
     <>

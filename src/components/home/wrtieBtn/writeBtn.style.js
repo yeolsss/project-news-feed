@@ -1,5 +1,5 @@
 import styled from "styled-components";
-export const Container = styled.div`
+export const WriteContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 1.5rem;
