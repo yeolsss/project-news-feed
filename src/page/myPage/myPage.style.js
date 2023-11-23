@@ -1,2 +1,5 @@
 import { styled } from "styled-components";
-export const MyPageContainer = styled.div``;
+export const MyPageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
