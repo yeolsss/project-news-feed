@@ -10,11 +10,7 @@ export const LoginModalWrapper = styled.div`
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
-  display: ${({ $isModalOpen }) => {
-    console.log($isModalOpen);
-    return $isModalOpen ? "flex" : "none";
-  }};
-  /* display: flex; */
+  display: flex;
 `;
 
 export const LoginWrapper = styled.main`

@@ -6,7 +6,6 @@
 export const checkValidation = (...value) => {
   let result = { result: false, index: 0 };
   for (let i = 0; i < value.length; i++) {
-    console.log(value[i]);
     if (value[i].trim() === "") {
       result.result = true;
       result.index = i;

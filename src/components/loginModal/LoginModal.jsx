@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useMutation } from "react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginFirebase } from "../../api/firebase";
 import {
   checkEmailValidation,
@@ -8,18 +8,13 @@ import {
   printError,
 } from "../../common/util";
 import { setLoading } from "../../redux/slice/loadingModal.slice";
-import {
-  closeLoginModal,
-  selectLoginModal,
-} from "../../redux/slice/loginModal.slice";
+import { closeLoginModal } from "../../redux/slice/loginModal.slice";
 import { Input } from "../common/Inputs";
 import JoinHeader from "../joinHeader/JoinHeader";
 import { JoinButton } from "../joinMan/joinMain.style";
 import * as St from "./loginModal.style";
 
 function LoginModal() {
-  const loginModal = useSelector(selectLoginModal);
-
   const [userInfoStates, setUserInfoStates] = useState({
     id: "",
     password: "",
@@ -47,8 +42,8 @@ function LoginModal() {
   };
 
   const loginMutation = useMutation(
-    async ({ id, password }) => {
-      await loginFirebase({ id, password });
+    ({ id, password }) => {
+      return loginFirebase({ id, password });
     },
     {
       onMutate: () => {
@@ -56,13 +51,14 @@ function LoginModal() {
       },
       onSuccess: () => {
         alert("로그인에 성공하였습니다.");
+        dispatch(closeLoginModal());
       },
-      onError: () => {
+      onError: (e) => {
+        console.error(e);
         alert("아이디 및 비밀번호를 다시 확인해주세요.");
       },
       onSettled: () => {
         dispatch(setLoading(false));
-        dispatch(closeLoginModal());
       },
     }
   );
@@ -94,7 +90,7 @@ function LoginModal() {
       return;
     }
 
-    await loginMutation.mutateAsync({ id, password });
+    await loginMutation.mutate({ id, password });
   };
 
   const handleOnClickCloseModal = (e, type) => {
@@ -109,10 +105,7 @@ function LoginModal() {
   };
 
   return (
-    <St.LoginModalWrapper
-      $isModalOpen={loginModal}
-      onClick={(e) => handleOnClickCloseModal(e, "modal")}
-    >
+    <St.LoginModalWrapper onClick={(e) => handleOnClickCloseModal(e, "modal")}>
       <St.LoginWrapper>
         <div>
           <JoinHeader />
@@ -121,7 +114,7 @@ function LoginModal() {
               type={"text"}
               placeholder={"아이디를 입력해주세요."}
               inputRef={idRef}
-              onChange={onChangeUserInfo}
+              onChange={(e) => onChangeUserInfo(e, "id")}
               inputType={"id"}
               $error={validDataStates.id}
             />
@@ -129,13 +122,17 @@ function LoginModal() {
               type={"password"}
               placeholder={"비밀번호를 입력해주세요."}
               inputRef={passwordRef}
-              onChange={onChangeUserInfo}
+              onChange={(e) => onChangeUserInfo(e, "password")}
               inputType={"password"}
               $error={validDataStates.password}
             />
             <St.JoinLink to="/join">회원가입</St.JoinLink>
             <JoinButton>로그인</JoinButton>
           </St.LoginForm>
+          <div>
+            <Button text={"google Login"} />
+            <Button text={"github Login"} />
+          </div>
         </div>
         <St.ModalCloseButton
           onClick={(e) => handleOnClickCloseModal(e, "button")}
