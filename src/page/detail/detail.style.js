@@ -1,2 +1,6 @@
 import { styled } from "styled-components";
-export const DetailContainer = styled.div``;
+export const DetailContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
