@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import styled, { ThemeProvider } from "styled-components";
+
 import LoadingModal from "./components/loadingModal/LoadingModal";
+
 import { themeSelector } from "./redux/slice/theme.slice";
 import { Router } from "./shared/Router";
 import { GlobalFonts } from "./shared/styles/GlobalFonts";
