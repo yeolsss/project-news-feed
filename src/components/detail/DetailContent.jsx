@@ -27,7 +27,6 @@ function DetailContent() {
   const [isUpdate, setIsUpdate] = useState(false);
   const [updateTag, setUpdateTag] = useState("");
 
-  console.log(newsData.tag_name_list);
   const handleOnClick = (type) => {
     if (type === "update") {
       setIsUpdate(true);
@@ -45,8 +44,7 @@ function DetailContent() {
       updateDoc(doc(db, "news_feed", newsId), {
         ...updateNewsData,
         updated_at: getDate(),
-      }).then((response) => {
-        console.log(response);
+      }).then(() => {
         setIsUpdate(false);
         setNewsData({ ...updateNewsData });
       });
@@ -64,6 +62,7 @@ function DetailContent() {
     const tagList = value.split(",");
     setUpdateNewsData({ ...updateNewsData, tag_name_list: tagList });
   };
+  useEffect(() => {}, [updateNewsData]);
   useEffect(() => {
     getDoc(doc(db, "news_feed", newsId)).then((doc) => {
       if (doc.exists()) {
