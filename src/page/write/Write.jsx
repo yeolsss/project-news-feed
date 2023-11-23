@@ -1,10 +1,11 @@
 // Write.jsx
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import React, { useState } from "react";
+
+import { db } from "../../common/firebase";
 import MainContainer from "../../components/WriteContainer/maincontainer/Main";
 import TitleContainer from "../../components/WriteContainer/titlecontainer/Title";
 import Registeration from "../../components/registeration/Registeration";
-import { firestore } from "./../../firebase";
 import { WriteContainer } from "./write.style";
 
 function Write() {
@@ -13,7 +14,7 @@ function Write() {
 
   const handleRegister = async () => {
     try {
-      const docRef = await addDoc(collection(firestore, "content"), {
+      const docRef = await addDoc(collection(db, "content"), {
         title,
         content,
         created_at: serverTimestamp(),
