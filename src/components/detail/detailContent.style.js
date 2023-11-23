@@ -58,6 +58,7 @@ export const Content = styled.p`
   min-height: 35rem;
   line-height: 2.5rem;
   letter-spacing: 0.1rem;
+  word-break: break-all;
 `;
 export const SelectButton = styled.button`
   padding: 0.5rem 1rem;

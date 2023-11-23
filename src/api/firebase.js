@@ -20,7 +20,7 @@ export const setUser = async (useData) => {
 
 /**
  * firebase login function
- * @param {*} loginData : {id, password}
+ * @param {*} loginData : {id, password, name, nickname}
  * @returns
  */
 export const loginFirebase = (loginData) => {

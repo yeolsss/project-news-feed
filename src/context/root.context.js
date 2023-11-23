@@ -24,6 +24,7 @@ export function RootProvider({ children }) {
         setIsLogin(true);
 
         // 로그인 한 사용자 이름 가져와
+        setUser({ email, uid });
         getDoc(doc(db, "user_info", uid)).then((docSnap) => {
           if (docSnap.exists()) {
             setUser({
