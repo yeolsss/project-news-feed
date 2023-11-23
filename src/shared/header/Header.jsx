@@ -7,6 +7,7 @@ import { openLoginModal } from "../../redux/slice/loginModal.slice";
 import { themeSelector, toggleTheme } from "../../redux/slice/theme.slice";
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import * as St from "./header.style";
 
 function Header() {
@@ -15,7 +16,6 @@ function Header() {
   const [isDropDown, setIsDropDown] = useState(false);
   // 요놈 가져다 쓰면 로그인 됐는지 알 수 있다.
   const { isLogin, logout, userInfo } = useRoot();
-  console.log(userInfo);
 
   const handleOnClickThemeToggle = () => {
     dispatch(toggleTheme());
@@ -35,12 +35,14 @@ function Header() {
   return (
     <St.LayoutHeader>
       <St.HeaderWrapper>
-        <h1>
-          <St.LayoutHeaderConst>const</St.LayoutHeaderConst> itNews{" "}
-          <St.LayoutHeaderEqual>=</St.LayoutHeaderEqual>{" "}
-          document.getElementById(
-          <St.LayoutHeaderString>"itNews"</St.LayoutHeaderString>);
-        </h1>
+        <Link to="/">
+          <h1>
+            <St.LayoutHeaderConst>const</St.LayoutHeaderConst> itNews{" "}
+            <St.LayoutHeaderEqual>=</St.LayoutHeaderEqual>{" "}
+            document.getElementById(
+            <St.LayoutHeaderString>"itNews"</St.LayoutHeaderString>);
+          </h1>
+        </Link>
       </St.HeaderWrapper>
       <St.HeaderButtonWrapper>
         <St.HeaderButton onClick={handleOnClickThemeToggle}>
@@ -57,7 +59,7 @@ function Header() {
             </St.HeaderButton>
             <St.DropDownMenu $isDropDown={isDropDown}>
               <li>
-                마이페이지
+                <Link to="/my-page">마이페이지</Link>
                 <FaHouseUser />
               </li>
               <li>

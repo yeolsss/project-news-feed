@@ -17,7 +17,7 @@ export const HeaderWrapper = styled.div`
   font-family: "d2coding";
   font-size: 2.4rem;
   padding: 1rem 2rem;
-  > h1 {
+  > a > h1 {
     font-size: 1.8rem;
     line-height: 27.2px; /* 113.333% */
     letter-spacing: 0.24px;
@@ -103,6 +103,13 @@ export const DropDownMenu = styled.ul`
     cursor: pointer;
     &:hover {
       background-color: var(--backgroundColor1);
+    }
+    > svg {
+      width: 3rem;
+      height: 3rem;
+      position: absolute;
+      right: 2rem;
+      pointer-events: none;
     }
   }
 `;

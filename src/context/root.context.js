@@ -6,7 +6,7 @@ import { auth } from "../common/firebase";
 const initialState = {
   isLogin: false,
   logout: () => {},
-  userInfo: {},
+  userInfo: { email: "", uid: "" },
 };
 
 export const RootContext = createContext(initialState);
@@ -18,13 +18,14 @@ export function RootProvider({ children }) {
   const loginCheck = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        const { email, uid } = user;
         // 사용자가 로그인한 상태
-        setUser(user);
+        setUser({ email, uid });
         setIsLogin(true);
       } else {
         // 사용자가 로그아웃한 상태
         setIsLogin(false);
-        setUser({});
+        setUser({ email: "", uid: "" });
       }
     });
   };
