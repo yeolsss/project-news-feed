@@ -1,10 +1,13 @@
-import { Hashtags } from "../addhashtag/addhashtags.style";
-import HashtagIcon from "../addhashtag/hashtagg.png";
-function AddHashtag() {
+import * as St from "./addhashtags.style";
+
+function AddHashtag({ tag, handleOnChangeTag }) {
   return (
-    <Hashtags>
-      <img src={HashtagIcon} alt="HashtagIcon" />
-    </Hashtags>
+    <St.Input
+      type="text"
+      placeholder="해시태그를 입력하세요"
+      value={tag}
+      onChange={handleOnChangeTag}
+    />
   );
 }
 
