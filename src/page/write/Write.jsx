@@ -1,6 +1,7 @@
 // Write.jsx
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../common/firebase";
 import { getDate } from "../../common/util";
 import MainContainer from "../../components/WriteContainer/maincontainer/Main";
@@ -18,6 +19,8 @@ function Write() {
   const [tag, setTag] = useState("");
   const { userInfo } = useRoot();
   const { uid, name, nickname, email, imgStorage } = userInfo;
+
+  const navigate = useNavigate();
 
   const handleOnChangeTag = (e) => {
     const { value } = e.target;
@@ -41,7 +44,7 @@ function Write() {
           return;
         }
       });
-      await addDoc(collection(db, "news_feed"), {
+      addDoc(collection(db, "news_feed"), {
         title: title,
         content: content.replaceAll("\n", "<br>"),
         created_at: getDate(),
@@ -49,12 +52,14 @@ function Write() {
         tag_name_list: [...tag.split(",")], // 태그 어떤거 할거?
         uid: uid, //  id 적으삼
         updated_at: "",
+      }).then((response) => {
+        setTitle("");
+        setContent("");
+        setImage(null);
+        setTag([]);
+        alert("글이 등록되었습니다.");
+        navigate(`/detail/${response.id}`);
       });
-      setTitle("");
-      setContent("");
-      setImage(null);
-      setTag([]);
-      alert("글이 등록되었습니다.");
     } catch (error) {
       console.error("Error 발생", error);
     }
