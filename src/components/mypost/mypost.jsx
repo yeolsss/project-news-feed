@@ -1,12 +1,20 @@
-import "firebase/firestore";
+// MyPosts.jsx
+
 import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import styled from 'styled-components';
 import { db } from "../../common/firebase";
 import { useRoot } from "../../context/root.context";
+
+const PostsContainer = styled.div`
+  /* 스타일 추가 */
+`;
 
 const MyPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
   const { userInfo } = useRoot();
+  const history = useHistory();
 
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -28,18 +36,19 @@ const MyPosts = () => {
     fetchUserPosts();
   }, [userInfo.uid]);
 
+  const handlePostButtonClick = (postId) => {
+    history.push(`/post/${postId}`);
+  };
+
   return (
-    <div>
-      <div>
-        {/* Display user posts */}
-        {userPosts.map((post) => (
-          <div key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.content}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    <PostsContainer>
+      {/* Display user posts */}
+      {userPosts.map((post) => (
+        <button key={post.id} onClick={() => handlePostButtonClick(post.id)}>
+          {post.title}
+        </button>
+      ))}
+    </PostsContainer>
   );
 };
 
