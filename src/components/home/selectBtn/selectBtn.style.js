@@ -5,7 +5,7 @@ export const BtnContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0 auto 0 auto;
-  height: 30rem;
+  height: 80rem;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -25,7 +25,8 @@ export const SelectBtn = styled.button`
   width: 15rem;
   padding: 1rem;
   margin-bottom: 1rem;
-
+  font-size: 1.6rem;
+  font-weight: bold;
   color: white;
   border: 0;
   border-radius: 1rem;

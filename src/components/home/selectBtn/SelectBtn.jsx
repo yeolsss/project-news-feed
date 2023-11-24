@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useRoot } from "../../../context/root.context";
 import * as St from "./selectBtn.style";
-function SelectBtn() {
+function SelectBtn({ handleTags: { tag, setTag } }) {
   const { tags } = useRoot();
-  const [tag, setTag] = useState("#전체");
 
   const onActiveTag = (event) => {
     if (event.target === event.currentTarget) return;

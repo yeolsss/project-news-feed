@@ -148,6 +148,10 @@ export const GlobalStyles = styled.createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
+  button {
+    border: none;
+    background-color: none;
+  }
 
   /* typography */
   html {
@@ -173,8 +177,15 @@ export const GlobalStyles = styled.createGlobalStyle`
       background-color 0.3s ease-in,
       color 0.3s ease-in;
     position: relative;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
   #root {
     width: 100%;
+    height: 100vh;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
