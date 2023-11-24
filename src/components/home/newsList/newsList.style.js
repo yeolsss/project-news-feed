@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const List = styled.div`
+export const List = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,4 +9,8 @@ export const List = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+`;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
