@@ -73,7 +73,6 @@ export function RootProvider({ children }) {
     userInfo,
     tags,
   };
-
   useEffect(() => {
     loginCheck();
     getTags();
