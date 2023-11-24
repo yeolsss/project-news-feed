@@ -5,10 +5,10 @@ import { db } from "../../../common/firebase";
 import { useRoot } from "../../../context/root.context";
 import profileImg from "../assets/profileImg.jpg";
 import * as St from "./news.style";
-function News({ news, setNews, tag }) {
+function News({ news, setNews, searchFilter }) {
   const { userInfo } = useRoot();
   const { nickname, imgStorage } = userInfo;
-
+  const { tags } = useRoot();
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(db, "news_feed"));
@@ -29,24 +29,23 @@ function News({ news, setNews, tag }) {
   }, []);
 
   const tagFiltered = news.filter((n) => {
-    if (tag == "#전체") {
+    if (tags == "#전체") {
       return news;
     } else {
-      const filter = n.tag_name_list.filter((item) => tag.includes(item));
-      return tag.includes(...filter);
+      const filter = n.tag_name_list.filter((item) => tags.includes(item));
+      return tags.includes(...filter);
     }
   });
+  const filterNews = searchFilter || tagFiltered;
 
   const navigate = useNavigate();
 
   return (
     <>
-      {tagFiltered.length === 0 ? (
-        <St.NewsContainer>
-          <St.NoneText>해당 카테고리에는 아직 기사가 없어요!</St.NoneText>
-        </St.NewsContainer>
+      {filterNews.length === 0 ? (
+        <St.NewsContainer>관련 기사가 아무것도 없어요!</St.NewsContainer>
       ) : (
-        tagFiltered.map((n) => {
+        filterNews.map((n) => {
           return (
             <St.NewsContainer
               key={n.id}

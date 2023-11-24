@@ -5,6 +5,11 @@ export const BtnContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0 auto 0 auto;
+  height: 30rem;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 export const SelectBtn = styled.button`
   ${(props) => {

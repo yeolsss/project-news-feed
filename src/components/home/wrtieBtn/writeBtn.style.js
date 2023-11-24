@@ -6,10 +6,8 @@ export const WriteContainer = styled.div`
   margin: 0 auto;
   border: 0;
 `;
-export const Notice = styled.p`
-  margin: 1rem 0;
-`;
-export const Button = styled.button`
+
+export const WriteBtn = styled.button`
   width: 15rem;
   align-items: center;
   padding: 1rem;
