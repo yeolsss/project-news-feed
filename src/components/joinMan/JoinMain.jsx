@@ -10,6 +10,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginFirebase, setUser } from "../../api/firebase";
+import { joinErrors } from "../../common/error";
 import { db } from "../../common/firebase";
 import { setLoading } from "../../redux/slice/loadingModal.slice";
 import { Input } from "../common/Inputs";
@@ -62,7 +63,7 @@ function JoinMain() {
       alert("회원가입이 완료되었습니다.");
     },
     onError: (error) => {
-      console.error(error);
+      joinErrors(error);
     },
     onSettled: async () => {
       // 회원 가입 후 자동 로그인

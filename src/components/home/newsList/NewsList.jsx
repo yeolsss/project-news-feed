@@ -12,12 +12,15 @@ function NewsList() {
   const [tag, setTag] = useState("#전체");
   const [searchInput, setSearchInput] = useState("");
 
-  const searchFilter = news.filter((n) => {
-    return (
-      n.title.toUpperCase().includes(searchInput.toUpperCase()) ||
-      n.content.toUpperCase().includes(searchInput.toUpperCase())
-    );
-  });
+  const searchFilter =
+    news.length !== 0
+      ? news.filter((n) => {
+          return (
+            n.title.toUpperCase().includes(searchInput.toUpperCase()) ||
+            n.content.toUpperCase().includes(searchInput.toUpperCase())
+          );
+        })
+      : [];
 
   useEffect(() => {
     const fetchData = async () => {

@@ -14,6 +14,7 @@ const initialState = {
     nickname: "",
     imgStorage: "",
     greeting: "",
+    getTags: () => {},
   },
   tags: [],
 };
@@ -80,6 +81,7 @@ export function RootProvider({ children }) {
     logout,
     userInfo,
     tags,
+    getTags,
   };
   useEffect(() => {
     loginCheck();
