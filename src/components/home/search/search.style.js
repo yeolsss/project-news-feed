@@ -6,6 +6,10 @@ export const SearchInput = styled.input`
   height: 3rem;
   width: 20rem;
   outline: none;
+  font-size: 1.6rem;
+  color: var(--textColor);
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
 `;
 export const SearchBtn = styled.button`
   background-color: var(--backgroundColor2);

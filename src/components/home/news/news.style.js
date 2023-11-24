@@ -21,6 +21,7 @@ export const NewsContainer = styled.li`
   align-items: center;
   cursor: pointer;
   margin-bottom: 1rem;
+  font-size: 1.6rem;
 `;
 export const Time = styled.p`
   margin-top: 0.5rem;

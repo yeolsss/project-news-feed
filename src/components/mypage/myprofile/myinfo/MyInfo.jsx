@@ -3,10 +3,11 @@ import { useRoot } from "../../../../context/root.context";
 import * as St from "./myInfo.style";
 
 function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
+  const DEFAULT_AVATAR = "/img/default-avatar.png";
   const { userInfo } = useRoot();
   const { uid, name, nickname, imgStorage } = userInfo;
 
-  const [imgFile, setImgFile] = useState("");
+  const [imgFile, setImgFile] = useState(imgStorage);
   const imgRef = useRef();
 
   const saveImgFile = () => {
@@ -17,7 +18,6 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
       setImgFile(reader.result);
     };
   };
-  console.log(imgStorage);
   return (
     <St.MyInfoContainer>
       {isEditing ? (
@@ -36,7 +36,7 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
         <form style={{ display: "flex" }}>
           <St.EditingMyProfileImg htmlFor="profileImg">
             <St.EditedMyProfileImg
-              src={imgFile ? imgFile : `/img/default-avatar.png`}
+              src={imgFile ? imgFile : DEFAULT_AVATAR}
               alt="profile-img"
             />
           </St.EditingMyProfileImg>
@@ -50,7 +50,7 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
         </form>
       ) : (
         <St.MyProfileImg>
-          <img src={imgStorage} />
+          <img src={imgStorage ? imgStorage : DEFAULT_AVATAR} alt={"이미지"} />
         </St.MyProfileImg>
       )}
 

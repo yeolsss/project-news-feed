@@ -8,7 +8,6 @@ import MainContainer from "../../components/WriteContainer/maincontainer/Main";
 import TitleContainer from "../../components/WriteContainer/titlecontainer/Title";
 import AddHashtag from "../../components/addhashtag/AddHashtag";
 import Registeration from "../../components/registeration/Registeration";
-import UploadPhoto from "../../components/uploadphoto/UploadPhoto";
 import { useRoot } from "../../context/root.context";
 import { WriteContainer } from "./write.style";
 
@@ -71,7 +70,6 @@ function Write() {
         <TitleContainer setTitle={[title, setTitle]} />
         <MainContainer setContent={[content, setContent]} />
         <AddHashtag tag={tag} handleOnChangeTag={handleOnChangeTag} />
-        <UploadPhoto />
         <Registeration handleRegister={handleRegister} />
       </WriteContainer>
     </>

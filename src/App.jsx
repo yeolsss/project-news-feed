@@ -29,5 +29,10 @@ const StContainer = styled.div`
   margin: 0 auto;
   background-color: var(--backgroundColor3);
   transition: background-color 0.3s ease-in-out;
+  overflow: scroll;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 export default App;

@@ -9,7 +9,7 @@ export const LayoutHeader = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 3rem 2rem 0;
-  margin-bottom: 10rem;
+  margin-bottom: 8rem;
 `;
 export const HeaderWrapper = styled.div`
   background-color: #4f4f4f;
