@@ -2,29 +2,15 @@ import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { db } from "../../../common/firebase";
-<<<<<<< HEAD
 import { useRoot } from "../../../context/root.context";
 import profileImg from "../assets/profileImg.jpg";
 import * as St from "./news.style";
+
 function News({ news, setNews, searchFilter }) {
   const { userInfo } = useRoot();
   const { nickname, imgStorage } = userInfo;
   const { tags } = useRoot();
-=======
 
-function News() {
-  const [news, setNews] = useState([]);
-
-  const [tag, setTag] = useState([
-    "#국내",
-    "#해외",
-    "#프론트엔드",
-    "#백엔드",
-    "#인공지능",
-    "#제품",
-  ]);
-
->>>>>>> 334d68931fdcb12436c24e5f61ba4333b3f12006
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(db, "news_feed"));
@@ -56,7 +42,6 @@ function News() {
 
   const navigate = useNavigate();
 
-<<<<<<< HEAD
   return (
     <>
       {filterNews.length === 0 ? (
@@ -97,9 +82,6 @@ function News() {
       )}
     </>
   );
-=======
-  return <></>;
->>>>>>> 334d68931fdcb12436c24e5f61ba4333b3f12006
 }
 
 export default News;
