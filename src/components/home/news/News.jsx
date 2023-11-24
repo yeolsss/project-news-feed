@@ -1,7 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../../common/firebase";
-import * as St from "./news.style";
 
 function News() {
   const [news, setNews] = useState([]);
@@ -39,37 +38,7 @@ function News() {
   //   return tag.includes(...filter);
   // });
 
-  return (
-    <>
-      {news.map((n) => {
-        return (
-          <St.Container key={n.id}>
-            <St.StProfileArea>
-              <St.ProfileImg src={n.image_path} />
-              <div>
-                <St.Name>{n.uid}</St.Name>
-                <St.Time>{n.created_at}</St.Time>
-              </div>
-            </St.StProfileArea>
-
-            <St.NewsArea>
-              <div>
-                <St.Title>{n.title}</St.Title>
-                {n.content.length < 200 ? (
-                  <St.Content>{n.content}</St.Content>
-                ) : (
-                  <St.Content>
-                    {n.content.slice(0, 200)}
-                    <St.SeeMore>...더보기</St.SeeMore>
-                  </St.Content>
-                )}
-              </div>
-            </St.NewsArea>
-          </St.Container>
-        );
-      })}
-    </>
-  );
+  return <></>;
 }
 
 export default News;

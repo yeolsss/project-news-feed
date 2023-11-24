@@ -22,6 +22,29 @@ export const MyProfileImg = styled.div`
   aspect-ratio: 1/1;
   margin: auto;
   margin-bottom: 0.5rem;
+  border-radius: 50%;
+`;
+
+export const EditingMyProfileImg = styled.label`
+  height: 11rem;
+  aspect-ratio: 1/1;
+  margin: auto;
+  margin-bottom: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+`;
+
+export const EditedMyProfileImg = styled.img`
+  top: 0;
+  left: 0;
+  transform: translate(50, 50);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: auto;
+  border-radius: 50%;
 `;
 
 export const MyNickName = styled.div`
@@ -39,4 +62,8 @@ export const MyNameEditingInput = styled.textarea`
   color: var(--textColor);
   border-radius: 0.5rem;
   resize: none;
+`;
+
+export const ProfileImgInput = styled.input`
+  display: none;
 `;

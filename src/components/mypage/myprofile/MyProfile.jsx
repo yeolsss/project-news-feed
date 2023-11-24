@@ -1,32 +1,15 @@
-import { collection, getDocs, query } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { db } from "../../../common/firebase";
+import React, { useState } from "react";
 import * as St from "./myProfile.style";
 import MyGreeting from "./mygreeting/MyGreeting";
 import MyInfo from "./myinfo/MyInfo";
 
 function MyProfile() {
-  useEffect(() => {
-    const fetchData = async () => {
-      const q = query(collection(db, "editedMyInfo"));
-      const querySnapshot = await getDocs(q);
-
-      const initialData = [];
-
-      querySnapshot.forEach((doc) => {
-        initialData.push({ uid: doc.uid, ...doc.data() });
-      });
-      setEditedMyInfo(initialData);
-    };
-    fetchData();
-  }, []);
-
   // 기본 데이터
   const TestData = {
     uid: "1",
     name: "이하빈",
-    img_storage: "😉",
-    nick_name: "I Like MILK",
+    imgstorage: "😉",
+    nickname: "I Like MILK",
     greeting: "안녕하세요 반가워요 잘 부탁드립니다.",
   };
   // 수정중일때
