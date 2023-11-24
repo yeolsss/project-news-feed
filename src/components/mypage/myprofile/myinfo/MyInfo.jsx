@@ -1,7 +1,11 @@
 import React, { useRef, useState } from "react";
+import { useRoot } from "../../../../context/root.context";
 import * as St from "./myInfo.style";
 
 function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
+  const { userInfo } = useRoot();
+  const { uid, name, nickname, imgStorage } = userInfo;
+
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef();
 
@@ -13,7 +17,7 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
       setImgFile(reader.result);
     };
   };
-
+  console.log(imgStorage);
   return (
     <St.MyInfoContainer>
       {isEditing ? (
@@ -23,16 +27,16 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
           maxLength={10}
           onChange={handleChangeEditText}
         >
-          {editedMyInfo.name}
+          {name}
         </St.MyNameEditingInput>
       ) : (
-        <St.MyName>{editedMyInfo.name}</St.MyName>
+        <St.MyName>{name}</St.MyName>
       )}
       {isEditing ? (
         <form style={{ display: "flex" }}>
           <St.EditingMyProfileImg htmlFor="profileImg">
             <St.EditedMyProfileImg
-              src={imgFile ? imgFile : `😉`}
+              src={imgFile ? imgFile : `/img/default-avatar.png`}
               alt="profile-img"
             />
           </St.EditingMyProfileImg>
@@ -45,7 +49,7 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
           />
         </form>
       ) : (
-        <St.MyProfileImg>😉</St.MyProfileImg>
+        <St.MyProfileImg>{imgStorage}</St.MyProfileImg>
       )}
 
       {isEditing ? (
@@ -55,10 +59,10 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
           maxLength={10}
           onChange={handleChangeEditText}
         >
-          {editedMyInfo.nickname}
+          {nickname}
         </St.MyNameEditingInput>
       ) : (
-        <St.MyNickName>{editedMyInfo.nickname}</St.MyNickName>
+        <St.MyNickName>{nickname}</St.MyNickName>
       )}
     </St.MyInfoContainer>
   );
