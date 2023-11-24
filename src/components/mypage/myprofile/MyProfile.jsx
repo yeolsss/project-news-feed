@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import * as St from "./myProfile.style";
 import MyGreeting from "./mygreeting/MyGreeting";
 import MyInfo from "./myinfo/MyInfo";
 
 function MyProfile() {
+
   // 기본 데이터
   const TestData = {
     uid: "1",
     name: "이하빈",
-    imgstorage: "😉",
+    imgStorage: "😉",
     nickname: "I Like MILK",
     greeting: "안녕하세요 반가워요 잘 부탁드립니다.",
   };
+
   // 수정중일때
   const [isEditing, setIsEditing] = useState(false);
   // 기본 데이터 가져옴

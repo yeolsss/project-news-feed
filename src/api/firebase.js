@@ -2,7 +2,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../common/firebase";
+import {auth} from "../common/firebase";
 
 /**
  * firebase signup function
@@ -10,12 +10,11 @@ import { auth } from "../common/firebase";
  * @returns
  */
 export const setUser = async (useData) => {
-  const user = await createUserWithEmailAndPassword(
-    auth,
-    useData.id,
-    useData.password
+  return await createUserWithEmailAndPassword(
+      auth,
+      useData.id,
+      useData.password
   );
-  return user;
 };
 
 /**
@@ -25,12 +24,11 @@ export const setUser = async (useData) => {
  */
 export const loginFirebase = (loginData) => {
   try {
-    const response = signInWithEmailAndPassword(
-      auth,
-      loginData.id,
-      loginData.password
+    return signInWithEmailAndPassword(
+        auth,
+        loginData.id,
+        loginData.password
     );
-    return response;
   } catch (error) {
     console.error(error);
   }
