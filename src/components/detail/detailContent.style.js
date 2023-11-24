@@ -34,6 +34,10 @@ export const Name = styled.p`
 `;
 
 export const Date = styled.p`
+<<<<<<< HEAD
+=======
+  font-size: 1.2rem;
+>>>>>>> 3f440ae5a107f23b6f2dd1d27da4655e15b6d980
   color: gray;
 `;
 
@@ -52,8 +56,17 @@ export const Title = styled.p`
   font-weight: 700;
 `;
 export const Content = styled.p`
+<<<<<<< HEAD
   font-size: 1.5rem;
   height: 35rem;
+=======
+  font-size: 1.6rem;
+  height: auto;
+  min-height: 35rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.1rem;
+  word-break: break-all;
+>>>>>>> 3f440ae5a107f23b6f2dd1d27da4655e15b6d980
 `;
 export const SelectButton = styled.button`
   padding: 0.5rem 1rem;
@@ -61,10 +74,60 @@ export const SelectButton = styled.button`
   color: white;
   border: 0;
   border-radius: 1rem;
+<<<<<<< HEAD
   cursor: pointer;
 `;
+=======
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in;
+  &:hover {
+    opacity: 1;
+  }
+`;
+export const TagItem = styled.p``;
+>>>>>>> 3f440ae5a107f23b6f2dd1d27da4655e15b6d980
 export const ButtonBox = styled.div`
   display: flex;
   margin-left: auto;
   gap: 1rem;
 `;
+<<<<<<< HEAD
+=======
+
+export const TagWrapper = styled.section`
+  display: flex;
+  column-gap: 1rem;
+`;
+
+// update
+export const UpdateInput = styled.input`
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  background-color: var(--backgroundColor1);
+  border: 0.2rem solid gray;
+  color: var(--textColor);
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 0.3s ease-in;
+  &:focus {
+    border-color: var(--primaryColor);
+  }
+`;
+
+export const UpdateTextArea = styled.textarea`
+  padding: 2rem;
+  box-sizing: border-box;
+  height: auto;
+  min-height: 20rem;
+  background-color: var(--backgroundColor1);
+  border: 0.2rem solid gray;
+  color: var(--textColor);
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 0.3s ease-in;
+  &:focus {
+    border-color: var(--primaryColor);
+  }
+`;
+>>>>>>> 3f440ae5a107f23b6f2dd1d27da4655e15b6d980
