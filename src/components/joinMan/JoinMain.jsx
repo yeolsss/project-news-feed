@@ -44,6 +44,7 @@ function JoinMain() {
   const nameRef = useRef(null);
   const nicknameRef = useRef(null);
 
+  // router-dom
   const navigate = useNavigate();
 
   const { mutate } = useMutation(setUser, {
