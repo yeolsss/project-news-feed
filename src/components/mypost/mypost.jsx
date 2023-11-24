@@ -1,27 +1,15 @@
-// MyPosts.jsx
-
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import styled from 'styled-components';
 import { db } from "../../common/firebase";
-import { useRoot } from "../../context/root.context";
-
-const PostsContainer = styled.div`
-  /* 스타일 추가 */
-`;
 
 const MyPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
-  const { userInfo } = useRoot();
   const history = useHistory();
 
   useEffect(() => {
     const fetchUserPosts = async () => {
-      const q = query(
-        collection(db, "news_feed"),
-        where("uid", "==", userInfo.uid)
-      );
+      const q = query(collection(db, "news_feed"));
       const querySnapshot = await getDocs(q);
       const posts = [];
       querySnapshot.forEach((doc) => {
@@ -34,21 +22,21 @@ const MyPosts = () => {
     };
 
     fetchUserPosts();
-  }, [userInfo.uid]);
-
-  const handlePostButtonClick = (postId) => {
+  }, []);
+  //경로 설정 필요
+  const handlePostClick = (postId) => {
     history.push(`/post/${postId}`);
   };
 
   return (
-    <PostsContainer>
+    <div>
       {/* Display user posts */}
       {userPosts.map((post) => (
-        <button key={post.id} onClick={() => handlePostButtonClick(post.id)}>
+        <button key={post.id} onClick={() => handlePostClick(post.id)}>
           {post.title}
         </button>
       ))}
-    </PostsContainer>
+    </div>
   );
 };
 
