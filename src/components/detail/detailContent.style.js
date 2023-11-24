@@ -18,7 +18,6 @@ export const HeaderImg = styled.img`
   height: 3rem;
   border-radius: 50%;
 `;
-
 export const ContentBox = styled.div`
   background-color: var(--backgroundColor1);
   margin: 2rem;
@@ -32,12 +31,10 @@ export const Name = styled.p`
   font-size: 2rem;
   font-weight: 600;
 `;
-
 export const Date = styled.p`
   font-size: 1.2rem;
   color: gray;
 `;
-
 export const Tag = styled.p`
   font-size: 1.5rem;
   font-weight: 600;
@@ -47,7 +44,6 @@ export const Tag = styled.p`
   border-radius: 1rem;
   margin-top: 2rem;
 `;
-
 export const Title = styled.p`
   font-size: 2.5rem;
   font-weight: 700;
@@ -79,12 +75,10 @@ export const ButtonBox = styled.div`
   margin-left: auto;
   gap: 1rem;
 `;
-
 export const TagWrapper = styled.section`
   display: flex;
   column-gap: 1rem;
 `;
-
 // update
 export const UpdateInput = styled.input`
   padding: 1rem 2rem;
@@ -99,7 +93,6 @@ export const UpdateInput = styled.input`
     border-color: var(--primaryColor);
   }
 `;
-
 export const UpdateTextArea = styled.textarea`
   padding: 2rem;
   box-sizing: border-box;

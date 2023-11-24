@@ -10,3 +10,7 @@ export const List = styled.ul`
     display: none;
   }
 `;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+`;

@@ -16,9 +16,8 @@ export const SearchBtn = styled.button`
   cursor: pointer;
 `;
 export const SearchBox = styled.div`
-  margin: 1rem 1rem 1rem 2.5rem;
+  margin: 1rem 1rem 1rem 2rem;
   display: flex;
-  flex-direction: row;
   align-items: center;
   height: 3rem;
   width: 20rem;
@@ -26,11 +25,4 @@ export const SearchBox = styled.div`
   border-radius: 1rem;
   overflow: hidden;
   background-color: var(--backgroundColor2);
-`;
-
-export const Topper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 `;
