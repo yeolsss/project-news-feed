@@ -51,7 +51,7 @@ export function RootProvider({ children }) {
               uid,
               name: docSnap.data().name,
               nickname: docSnap.data().nickname,
-              imgStorage: docSnap.data().img_storage,
+              imgStorage: docSnap.data().imgStorage,
               greeting: docSnap.data().greeting,
             });
           } else {
