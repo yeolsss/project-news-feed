@@ -21,7 +21,7 @@ function DetailContent() {
   const { userInfo } = useRoot();
   const { id: newsId } = useParams();
   const navigate = useNavigate();
-  const { uid, name, nickname, email, imgStorage } = userInfo;
+  const { uid, name, nickname, imgStorage } = userInfo;
   const newsObj = {
     title: "",
     content: "",
