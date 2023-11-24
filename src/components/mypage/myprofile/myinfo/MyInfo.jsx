@@ -49,7 +49,9 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
           />
         </form>
       ) : (
-        <St.MyProfileImg>{imgStorage}</St.MyProfileImg>
+        <St.MyProfileImg>
+          <img src={imgStorage} />
+        </St.MyProfileImg>
       )}
 
       {isEditing ? (
