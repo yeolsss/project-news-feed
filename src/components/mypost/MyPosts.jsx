@@ -1,32 +1,30 @@
 import "firebase/firestore";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { db } from "../../common/firebase";
+import React, { useState } from "react";
 import { useRoot } from "../../context/root.context";
 
 const MyPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
   const { userInfo } = useRoot();
 
-  useEffect(() => {
-    const fetchUserPosts = async () => {
-      const q = query(
-        collection(db, "news_feed"),
-        where("uid", "==", userInfo.uid)
-      );
-      const querySnapshot = await getDocs(q);
-      const posts = [];
-      querySnapshot.forEach((doc) => {
-        posts.push({
-          id: doc.id,
-          ...doc.data(),
-        });
-      });
-      setUserPosts(posts);
-    };
+  // useEffect(() => {
+  //   const fetchUserPosts = async () => {
+  //     const q = query(
+  //       collection(db, "news_feed"),
+  //       where("uid", "==", userInfo.uid)
+  //     );
+  //     const querySnapshot = await getDocs(q);
+  //     const posts = [];
+  //     querySnapshot.forEach((doc) => {
+  //       posts.push({
+  //         id: doc.id,
+  //         ...doc.data(),
+  //       });
+  //     });
+  //     setUserPosts(posts);
+  //   };
 
-    fetchUserPosts();
-  }, [userInfo.uid]);
+  //   fetchUserPosts();
+  // }, [userInfo.uid]);
 
   return (
     <div>
