@@ -2,7 +2,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import {auth} from "../common/firebase";
+import { auth, db } from "../common/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 /**
  * firebase signup function
@@ -11,9 +12,9 @@ import {auth} from "../common/firebase";
  */
 export const setUser = async (useData) => {
   return await createUserWithEmailAndPassword(
-      auth,
-      useData.id,
-      useData.password
+    auth,
+    useData.id,
+    useData.password
   );
 };
 
@@ -24,12 +25,23 @@ export const setUser = async (useData) => {
  */
 export const loginFirebase = (loginData) => {
   try {
-    return signInWithEmailAndPassword(
-        auth,
-        loginData.id,
-        loginData.password
-    );
+    return signInWithEmailAndPassword(auth, loginData.id, loginData.password);
   } catch (error) {
     console.error(error);
   }
+};
+
+/**
+ * 전체 회원 조회
+ * 이 데이터로 데이터 출력
+ */
+export const getUserInfo = async () => {
+  const userCollection = collection(db, "user_info");
+  let userSnapshot;
+  try {
+    userSnapshot = await getDocs(userCollection);
+  } catch (error) {
+    console.error(error);
+  }
+  return userSnapshot.docs.map((doc) => doc.data());
 };

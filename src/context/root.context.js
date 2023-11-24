@@ -17,6 +17,9 @@ const initialState = {
     getTags: () => {},
   },
   tags: [],
+  getTags: () => {},
+  // 로그인 되어있지않으면 홈으로 이동 후 로그인창 띄우기
+  loginCheckToNavigateHome: () => {},
 };
 
 export const RootContext = createContext(initialState);
@@ -82,6 +85,7 @@ export function RootProvider({ children }) {
     userInfo,
     tags,
     getTags,
+    loginCheck,
   };
   useEffect(() => {
     loginCheck();

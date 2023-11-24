@@ -1,9 +1,14 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import * as St from "./myProfile.style";
 import MyGreeting from "./mygreeting/MyGreeting";
 import MyInfo from "./myinfo/MyInfo";
+import { useRoot } from "../../../context/root.context";
+import { useLoginContext } from "../../../context/login.context";
 
 function MyProfile() {
+  const { userInfo, isLogin } = useRoot();
+  const { loginChecked } = useLoginContext();
+  const { uid, email, name, nickname, greeting } = userInfo;
 
   // 기본 데이터
   const TestData = {
@@ -31,6 +36,10 @@ function MyProfile() {
     setIsEditing(false);
     alert("수정이 완료되었습니다.");
   };
+
+  useEffect(() => {
+    loginChecked();
+  }, []);
 
   return (
     <St.MyProfileContainer>

@@ -20,35 +20,40 @@ function News({ news, setNews, searchFilter }) {
   const filterNews = searchFilter || tagFiltered;
 
   const navigate = useNavigate();
-
   return (
     <>
       {filterNews.length === 0 ? (
         <St.NewsContainer>관련 기사가 아무것도 없어요!</St.NewsContainer>
       ) : (
-        filterNews.map((n) => (
+        filterNews.map((news) => (
           <St.NewsContainer
-            key={n.id}
+            key={news.id}
             onClick={() => {
-              navigate(`/detail/${n.id}`);
+              navigate(`/detail/${news.id}`);
             }}
           >
             <St.StProfileArea>
-              <St.ProfileImg src={imgStorage ? imgStorage : profileImg} />
+              <St.ProfileImg
+                src={
+                  news.user.image_path !== ""
+                    ? news.user.image_path
+                    : profileImg
+                }
+              />
               <div>
-                <St.Name>{nickname}</St.Name>
-                <St.Time>{n.created_at}</St.Time>
+                <St.Name>{news.user.nickname}</St.Name>
+                <St.Time>{news.created_at}</St.Time>
               </div>
             </St.StProfileArea>
 
             <St.NewsArea>
               <div>
-                <St.Title>{n.title}</St.Title>
-                {n.content.length < 200 ? (
-                  <St.Content>{n.content}</St.Content>
+                <St.Title>{news.title}</St.Title>
+                {news.content.length < 200 ? (
+                  <St.Content>{news.content}</St.Content>
                 ) : (
                   <St.Content>
-                    {n.content.slice(0, 200)}
+                    {news.content.slice(0, 200)}
                     <St.SeeMore>...더보기</St.SeeMore>
                   </St.Content>
                 )}
