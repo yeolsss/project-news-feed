@@ -1,29 +1,65 @@
 // Write.jsx
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { db } from "../../common/firebase";
+import { getDate } from "../../common/util";
 import MainContainer from "../../components/WriteContainer/maincontainer/Main";
 import TitleContainer from "../../components/WriteContainer/titlecontainer/Title";
+import AddHashtag from "../../components/addhashtag/AddHashtag";
 import Registeration from "../../components/registeration/Registeration";
+import UploadPhoto from "../../components/uploadphoto/UploadPhoto";
+import { useRoot } from "../../context/root.context";
 import { WriteContainer } from "./write.style";
 
 function Write() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [image, setImage] = useState(null);
+  const [tag, setTag] = useState("");
+  const { userInfo } = useRoot();
+  const { uid, name, nickname, email, imgStorage } = userInfo;
 
+  const navigate = useNavigate();
+
+  const handleOnChangeTag = (e) => {
+    const { value } = e.target;
+    setTag(value);
+  };
+
+  // 등록
   const handleRegister = async () => {
     try {
-      const docRef = await addDoc(collection(db, "content"), {
-        title,
-        content,
-        created_at: serverTimestamp(),
-        image_path: "", // 이미지 경로
-        tag_name_list: [], // 태그 어떤거 할거?
-        uid: "", //  id 적으삼
-        updated_at: serverTimestamp(),
+      const fireStoreTags = await getDocs(collection(db, "tags"));
+      const tempTagsArr = [];
+      fireStoreTags.forEach((doc) => {
+        tempTagsArr.push(doc.data().tag_name);
       });
-      console.log("등록된 ID: ", docRef.id);
+
+      // tag 있는지 확인
+      tag.split(",").forEach(async (tag) => {
+        if (!tempTagsArr.join("").includes(tag.trim())) {
+          // 없으면 tags firestore에 추가해11
+          await addDoc(collection(db, "tags"), { tag_name: tag });
+          return;
+        }
+      });
+      addDoc(collection(db, "news_feed"), {
+        title: title,
+        content: content.replaceAll("\n", "<br>"),
+        created_at: getDate(),
+        image_path: "", // 이미지 경로
+        tag_name_list: [...tag.split(",")], // 태그 어떤거 할거?
+        uid: uid, //  id 적으삼
+        updated_at: "",
+      }).then((response) => {
+        setTitle("");
+        setContent("");
+        setImage(null);
+        setTag([]);
+        alert("글이 등록되었습니다.");
+        navigate(`/detail/${response.id}`);
+      });
     } catch (error) {
       console.error("Error 발생", error);
     }
@@ -32,9 +68,11 @@ function Write() {
   return (
     <>
       <WriteContainer>
-        <TitleContainer setTitle={setTitle} />
-        <MainContainer setContent={setContent} />
-        <Registeration onClick={handleRegister}></Registeration>
+        <TitleContainer setTitle={[title, setTitle]} />
+        <MainContainer setContent={[content, setContent]} />
+        <AddHashtag tag={tag} handleOnChangeTag={handleOnChangeTag} />
+        <UploadPhoto />
+        <Registeration handleRegister={handleRegister} />
       </WriteContainer>
     </>
   );

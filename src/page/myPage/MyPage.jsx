@@ -1,5 +1,5 @@
 import MyProfile from "../../components/mypage/myprofile/MyProfile";
-import MyPosts from "../../components/mypost/MyPost";
+import MyPosts from "../../components/mypost/MyPosts";
 import * as St from "./myPage.style";
 
 function MyPage() {

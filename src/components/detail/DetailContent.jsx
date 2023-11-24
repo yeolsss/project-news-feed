@@ -1,4 +1,13 @@
-import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
+
 import { useNavigate, useParams } from "react-router-dom";
 
 import React, { useEffect, useState } from "react";
@@ -12,7 +21,7 @@ function DetailContent() {
   const { userInfo } = useRoot();
   const { id: newsId } = useParams();
   const navigate = useNavigate();
-  const { uid, name, nickname, email, imgStorage } = userInfo;
+  const { uid, name, nickname, imgStorage } = userInfo;
   const newsObj = {
     title: "",
     content: "",
@@ -27,7 +36,7 @@ function DetailContent() {
   const [isUpdate, setIsUpdate] = useState(false);
   const [updateTag, setUpdateTag] = useState("");
 
-  const handleOnClick = (type) => {
+  const handleOnClick = async (type) => {
     if (type === "update") {
       setIsUpdate(true);
       setUpdateTag(newsData.tag_name_list.join(","));
@@ -41,6 +50,21 @@ function DetailContent() {
       setIsUpdate(false);
     } else if (type === "complete") {
       // 업데이트
+      const fireStoreTags = await getDocs(collection(db, "tags"));
+      const tempTagsArr = [];
+      fireStoreTags.forEach((doc) => {
+        tempTagsArr.push(doc.data().tag_name);
+      });
+
+      // tag 있는지 확인
+      updateTag.split(",").forEach(async (tag) => {
+        if (!tempTagsArr.join("").includes(tag.trim())) {
+          // 없으면 tags firestore에 추가해
+          await addDoc(collection(db, "tags"), { tag_name: tag });
+          return;
+        }
+      });
+
       updateDoc(doc(db, "news_feed", newsId), {
         ...updateNewsData,
         updated_at: getDate(),
@@ -112,7 +136,9 @@ function DetailContent() {
           ) : (
             <>
               <St.Title> {newsData.title}</St.Title>
-              <St.Content>{newsData.content}</St.Content>
+              <St.Content>
+                {newsData.content.replaceAll("<br>", "\n")}
+              </St.Content>
               <St.TagWrapper>
                 {newsData.tag_name_list.length &&
                   newsData.tag_name_list.map((tag, index) => (

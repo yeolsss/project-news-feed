@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth, db } from "../common/firebase";
 
@@ -15,6 +15,7 @@ const initialState = {
     imgStorage: "",
     greeting: "",
   },
+  tags: [],
 };
 
 export const RootContext = createContext(initialState);
@@ -23,6 +24,17 @@ export const RootContext = createContext(initialState);
 export function RootProvider({ children }) {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUser] = useState({});
+  const [tags, setTags] = useState([]);
+
+  const getTags = async () => {
+    // taglist 호출
+    const fireStoreTags = await getDocs(collection(db, "tags"));
+    const tempTagsArr = [];
+    fireStoreTags.forEach((doc) => {
+      tempTagsArr.push(doc.data());
+    });
+    setTags([...tempTagsArr]);
+  };
   const loginCheck = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -67,10 +79,11 @@ export function RootProvider({ children }) {
     isLogin,
     logout,
     userInfo,
+    tags,
   };
-
   useEffect(() => {
     loginCheck();
+    getTags();
   }, []);
 
   return <RootContext.Provider value={value}>{children}</RootContext.Provider>;
