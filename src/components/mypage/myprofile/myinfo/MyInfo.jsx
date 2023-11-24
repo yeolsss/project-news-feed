@@ -6,7 +6,7 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
   const { userInfo } = useRoot();
   const { uid, name, nickname, imgStorage } = userInfo;
 
-  const [imgFile, setImgFile] = useState("");
+  const [imgFile, setImgFile] = useState(imgStorage);
   const imgRef = useRef();
 
   const saveImgFile = () => {
@@ -49,7 +49,9 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText }) {
           />
         </form>
       ) : (
-        <St.MyProfileImg>{imgStorage}</St.MyProfileImg>
+        <St.MyProfileImg>
+          <img src={imgStorage ? imgStorage : `/img/default-avatar.png`} />
+        </St.MyProfileImg>
       )}
 
       {isEditing ? (

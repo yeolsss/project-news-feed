@@ -17,12 +17,22 @@ export const MyName = styled.div`
 `;
 
 export const MyProfileImg = styled.div`
-  border: 0.1rem solid blue;
   height: 11rem;
   aspect-ratio: 1/1;
   margin: auto;
   margin-bottom: 0.5rem;
   border-radius: 50%;
+
+  & img {
+    top: 0;
+    left: 0;
+    transform: translate(50, 50);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: auto;
+    border-radius: 50%;
+  }
 `;
 
 export const EditingMyProfileImg = styled.label`

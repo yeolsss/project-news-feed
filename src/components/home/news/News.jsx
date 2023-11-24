@@ -38,6 +38,7 @@ function News({ news, setNews, searchFilter, tag }) {
     }
   });
   const filterNews = searchFilter && tagFiltered;
+  console.log(tagFiltered);
 
   const navigate = useNavigate();
 
