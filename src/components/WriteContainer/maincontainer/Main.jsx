@@ -1,12 +1,10 @@
 // MainContainer.jsx
-import React, { useState } from "react";
-import AddHashtag from "../../addhashtag/AddHashtag";
-import Registeration from "../../registeration/Registeration";
-import UploadPhoto from "../uploadphoto/UploadPhoto";
+import React from "react";
 import { Main, Maincontent } from "./Main.style";
 
-function MainContainer() {
-  const [content, setContent] = useState("");
+function MainContainer(props) {
+  const content = props.setContent[0];
+  const setContent = props.setContent[1];
 
   const ContentChange = (event) => {
     setContent(event.target.value);
@@ -19,11 +17,7 @@ function MainContainer() {
         value={content}
         onChange={ContentChange}
       />
-      <Maincontent>
-        <UploadPhoto />
-        <AddHashtag />
-        <Registeration />
-      </Maincontent>
+      <Maincontent></Maincontent>
     </Main>
   );
 }

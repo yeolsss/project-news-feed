@@ -4,3 +4,8 @@ export const Photos = styled.button`
   border: none;
   cursor: pointer;
 `;
+export const Img = styled.img`
+  width: 10rem;
+  height: 10rem;
+  cursor: pointer;
+`;

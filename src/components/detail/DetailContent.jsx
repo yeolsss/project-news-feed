@@ -5,25 +5,10 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../common/firebase";
 import { getDate } from "../../common/util";
 import { useRoot } from "../../context/root.context";
-
 import profileImg from "./assets/profileImg.jpg";
 import * as St from "./detailContent.style";
 
 function DetailContent() {
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       const querySnapshot = await getDocs(collection(db, "news_feed"));
-  //       querySnapshot.forEach((doc) => {
-  //         const data = {
-  //           id: doc.id,
-  //           ...doc.data(),
-  //         };
-  //         console.log(data);
-  //       });
-  //     };
-  //     fetchData();
-  //   }, []);
-
   const { userInfo } = useRoot();
   const { id: newsId } = useParams();
   const navigate = useNavigate();

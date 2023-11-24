@@ -35,6 +35,7 @@ export const Name = styled.p`
 
 export const Date = styled.p`
   font-size: 1.2rem;
+
   color: gray;
 `;
 
@@ -53,6 +54,9 @@ export const Title = styled.p`
   font-weight: 700;
 `;
 export const Content = styled.p`
+  font-size: 1.5rem;
+  height: 35rem;
+
   font-size: 1.6rem;
   height: auto;
   min-height: 35rem;
@@ -66,6 +70,10 @@ export const SelectButton = styled.button`
   color: white;
   border: 0;
   border-radius: 1rem;
+
+  cursor: pointer;
+`;
+export const TagItem = styled.p`
   opacity: 0.7;
   cursor: pointer;
   transition: opacity 0.3s ease-in;
@@ -73,7 +81,7 @@ export const SelectButton = styled.button`
     opacity: 1;
   }
 `;
-export const TagItem = styled.p``;
+
 export const ButtonBox = styled.div`
   display: flex;
   margin-left: auto;
