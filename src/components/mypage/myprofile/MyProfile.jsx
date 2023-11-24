@@ -21,20 +21,20 @@ function MyProfile() {
     fetchData();
   }, []);
 
-  const updateData = async (e) => {
-    const infoRef = doc(db, "editedMyInfo", uid);
-    await updateData(infoRef, { ...data });
+  // const updateData = async (e) => {
+  //   const infoRef = doc(db, "editedMyInfo", uid);
+  //   await updateData(infoRef, { ...data });
 
-    setEditedMyInfo((prev) => {
-      return prev.map((el) => {
-        if (el.uid === data.uid) {
-          return { ...el };
-        } else {
-          return el;
-        }
-      });
-    });
-  };
+  //   setEditedMyInfo((prev) => {
+  //     return prev.map((el) => {
+  //       if (el.uid === data.uid) {
+  //         return { ...el };
+  //       } else {
+  //         return el;
+  //       }
+  //     });
+  //   });
+  // };
 
   // 기본 데이터
   const TestData = {
