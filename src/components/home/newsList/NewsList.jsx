@@ -7,7 +7,7 @@ import * as St from "./newsList.style";
 
 function NewsList() {
   const [news, setNews] = useState([]);
-
+  const [tag, setTag] = useState("#전체");
   const [searchInput, setSearchInput] = useState("");
 
   const searchFilter = news.filter((n) => {
@@ -21,9 +21,14 @@ function NewsList() {
     <>
       <Search searchInput={searchInput} setSearchInput={setSearchInput} />
       <St.Container>
-        <SelectBtn />
+        <SelectBtn tag={tag} setTag={setTag} />
         <St.List>
-          <News news={news} setNews={setNews} searchFilter={searchFilter} />
+          <News
+            news={news}
+            setNews={setNews}
+            searchFilter={searchFilter}
+            tag={tag}
+          />
         </St.List>
 
         <WriteBtn />

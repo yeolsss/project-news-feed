@@ -6,10 +6,9 @@ import { useRoot } from "../../../context/root.context";
 import profileImg from "../assets/profileImg.jpg";
 import * as St from "./news.style";
 
-function News({ news, setNews, searchFilter }) {
+function News({ news, setNews, searchFilter, tag }) {
   const { userInfo } = useRoot();
   const { nickname, imgStorage } = userInfo;
-  const { tags } = useRoot();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,14 +30,14 @@ function News({ news, setNews, searchFilter }) {
   }, []);
 
   const tagFiltered = news.filter((n) => {
-    if (tags == "#전체") {
+    if (tag == "#전체") {
       return news;
     } else {
-      const filter = n.tag_name_list.filter((item) => tags.includes(item));
-      return tags.includes(...filter);
+      const filter = n.tag_name_list.filter((item) => tag.includes(item));
+      return tag.includes(...filter);
     }
   });
-  const filterNews = searchFilter || tagFiltered;
+  const filterNews = searchFilter && tagFiltered;
 
   const navigate = useNavigate();
 
