@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect } from "react";
+import { db } from "../../common/firebase";
+=======
 import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -5,10 +10,25 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../common/firebase";
 import { getDate } from "../../common/util";
 import { useRoot } from "../../context/root.context";
+>>>>>>> 3f440ae5a107f23b6f2dd1d27da4655e15b6d980
 import profileImg from "./assets/profileImg.jpg";
 import * as St from "./detailContent.style";
 
 function DetailContent() {
+<<<<<<< HEAD
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, "news_feed"));
+      querySnapshot.forEach((doc) => {
+        const data = {
+          id: doc.id,
+          ...doc.data(),
+        };
+        console.log(data);
+      });
+    };
+    fetchData();
+=======
   const { userInfo } = useRoot();
   const { id: newsId } = useParams();
   const navigate = useNavigate();
@@ -72,12 +92,29 @@ function DetailContent() {
         console.log("No such document!");
       }
     });
+>>>>>>> 3f440ae5a107f23b6f2dd1d27da4655e15b6d980
   }, []);
 
   return (
     <>
       <St.Container>
         <St.HeaderBox>
+<<<<<<< HEAD
+          <St.HeaderImg src={profileImg} alt="" />
+          <St.Name>hyewon</St.Name>
+        </St.HeaderBox>
+        <St.ContentBox>
+          <St.Date>날짜</St.Date>
+
+          <St.Title>제목</St.Title>
+          <St.Content>내용</St.Content>
+          <St.Tag>#해외</St.Tag>
+
+          <St.ButtonBox>
+            <St.SelectButton>수정</St.SelectButton>
+            <St.SelectButton>삭제</St.SelectButton>
+          </St.ButtonBox>
+=======
           <St.HeaderImg
             src={imgStorage ? imgStorage : profileImg}
             alt="프로필사진"
@@ -146,6 +183,7 @@ function DetailContent() {
               </St.SelectButton>
             </St.ButtonBox>
           )}
+>>>>>>> 3f440ae5a107f23b6f2dd1d27da4655e15b6d980
         </St.ContentBox>
       </St.Container>
     </>

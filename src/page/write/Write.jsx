@@ -1,22 +1,25 @@
 // Write.jsx
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import React, { useState } from "react";
-
 import { db } from "../../common/firebase";
 import MainContainer from "../../components/WriteContainer/maincontainer/Main";
 import TitleContainer from "../../components/WriteContainer/titlecontainer/Title";
+import AddHashtag from "../../components/addhashtag/AddHashtag";
 import Registeration from "../../components/registeration/Registeration";
+import UploadPhoto from "../../components/uploadphoto/UploadPhoto";
 import { WriteContainer } from "./write.style";
 
 function Write() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [image, setImage] = useState(null);
+  const [tags, setTags] = useState([]);
 
   const handleRegister = async () => {
     try {
-      const docRef = await addDoc(collection(db, "content"), {
-        title,
-        content,
+      const docRef = await addDoc(collection(db, "news_feed"), {
+        title: title,
+        content: content,
         created_at: serverTimestamp(),
         image_path: "", // 이미지 경로
         tag_name_list: [], // 태그 어떤거 할거?
@@ -24,6 +27,11 @@ function Write() {
         updated_at: serverTimestamp(),
       });
       console.log("등록된 ID: ", docRef.id);
+      setTitle("");
+      setContent("");
+      setImage(null);
+      setTags([]);
+      alert("글이 등록되었습니다.");
     } catch (error) {
       console.error("Error 발생", error);
     }
@@ -32,9 +40,12 @@ function Write() {
   return (
     <>
       <WriteContainer>
-        <TitleContainer setTitle={setTitle} />
-        <MainContainer setContent={setContent} />
-        <Registeration onClick={handleRegister}></Registeration>
+        <TitleContainer setTitle={[title, setTitle]} />
+
+        <MainContainer setContent={[content, setContent]} />
+        <UploadPhoto />
+        <AddHashtag />
+        <Registeration handleRegister={handleRegister} />
       </WriteContainer>
     </>
   );
