@@ -1,44 +1,50 @@
-import "firebase/firestore";
-import React, { useState } from "react";
-import { useRoot } from "../../context/root.context";
+// import "firebase/firestore";
+// import React from "react";
 
-const MyPosts = () => {
-  const [userPosts, setUserPosts] = useState([]);
-  const { userInfo } = useRoot();
+// const MyPosts = () => {
+//   const [userPosts, setUserPosts] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchUserPosts = async () => {
-  //     const q = query(
-  //       collection(db, "news_feed"),
-  //       where("uid", "==", userInfo.uid)
-  //     );
-  //     const querySnapshot = await getDocs(q);
-  //     const posts = [];
-  //     querySnapshot.forEach((doc) => {
-  //       posts.push({
-  //         id: doc.id,
-  //         ...doc.data(),
-  //       });
-  //     });
-  //     setUserPosts(posts);
-  //   };
+// import { collection, getDocs, query, where } from "firebase/firestore";
+// import React, { useEffect, useState } from "react";
+// import { db } from "../../common/firebase";
+// import { useRoot } from "../../context/root.context";
 
-  //   fetchUserPosts();
-  // }, [userInfo.uid]);
+// const MyPosts = () => {
+//   const [userPosts, setUserPosts] = useState([]);
+//   const { userInfo } = useRoot();
 
-  return (
-    <div>
-      <div>
-        {/* Display user posts */}
-        {userPosts.map((post) => (
-          <div key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.content}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+//   useEffect(() => {
+//     const fetchUserPosts = async () => {
+//       const q = query(
+//         collection(db, "news_feed"),
+//         where("uid", "==", userInfo.uid)
+//       );
+//       const querySnapshot = await getDocs(q);
+//       const posts = [];
+//       querySnapshot.forEach((doc) => {
+//         posts.push({
+//           id: doc.id,
+//           ...doc.data(),
+//         });
+//       });
+//       setUserPosts(posts);
+//     };
 
-export default MyPosts;
+//     fetchUserPosts();
+//   }, [userInfo.uid]);
+
+//   return (
+//     <div>
+//       <div>
+//         {userPosts.map((post) => (
+//           <div key={post.id}>
+//             <h2>{post.title}</h2>
+//             <p>{post.content}</p>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default MyPosts;

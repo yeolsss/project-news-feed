@@ -1,15 +1,13 @@
 import styled from "styled-components";
-export const Container = styled.div`
+export const WriteContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 1.5rem;
   margin: 0 auto;
   border: 0;
 `;
-export const Notice = styled.p`
-  margin: 1rem 0;
-`;
-export const Button = styled.button`
+
+export const WriteBtn = styled.button`
   width: 15rem;
   align-items: center;
   padding: 1rem;
