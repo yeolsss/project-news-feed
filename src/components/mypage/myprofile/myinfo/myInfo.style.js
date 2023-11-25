@@ -5,7 +5,10 @@ export const MyInfoContainer = styled.section`
   width: 25%;
   height: 90%;
   font-size: 2rem;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const MyName = styled.div`
@@ -62,16 +65,6 @@ export const MyNickName = styled.div`
   height: 15.5%;
   text-align: center;
   line-height: 170%;
-`;
-
-export const MyNameEditingInput = styled.textarea`
-  width: 96%;
-  height: 15.5%;
-  margin-bottom: 0.5rem;
-  background-color: var(--backgroundColor1);
-  color: var(--textColor);
-  border-radius: 0.5rem;
-  resize: none;
 `;
 
 export const ProfileImgInput = styled.input`

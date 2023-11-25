@@ -21,7 +21,7 @@ function DetailContent() {
   const { userInfo } = useRoot();
   const { id: newsId } = useParams();
   const navigate = useNavigate();
-  const { uid, name, nickname, imgStorage } = userInfo;
+  const { uid, name } = userInfo;
   const newsObj = {
     title: "",
     content: "",
@@ -89,13 +89,28 @@ function DetailContent() {
   };
 
   useEffect(() => {
-    getDoc(doc(db, "news_feed", newsId)).then((doc) => {
-      if (doc.exists()) {
-        setNewsData({ ...doc.data() });
-      } else {
-        console.log("No such document!");
-      }
-    });
+    try {
+      (async () => {
+        const newsDoc = await getDoc(doc(db, "news_feed", newsId));
+
+        if (newsDoc.exists()) {
+          const newsData = newsDoc.data();
+          const uid = newsData.uid;
+
+          const userDoc = await getDoc(doc(db, "user_info", uid));
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setNewsData({ ...newsData, ...userData });
+          } else {
+            console.log("유저정보가 없습니다.");
+          }
+        } else {
+          console.log("No such document!");
+        }
+      })();
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   return (
@@ -103,11 +118,11 @@ function DetailContent() {
       <St.Container>
         <St.HeaderBox>
           <St.HeaderImg
-            src={imgStorage ? imgStorage : profileImg}
+            src={newsData.image_path ? newsData.image_path : profileImg}
             alt="프로필사진"
           />
           <St.Name>
-            {nickname} ({name})
+            {newsData.nickname} ({newsData.name})
           </St.Name>
         </St.HeaderBox>
         <St.ContentBox>

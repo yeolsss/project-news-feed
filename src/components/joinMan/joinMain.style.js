@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+
 export const JoinMainSection = styled.main`
   margin-top: 8rem;
 `;
@@ -62,7 +63,6 @@ export const JoinButton = styled.button`
   border-radius: 0.5rem;
   cursor: pointer;
   transition: opacity 0.3s ease-in;
-  color: #ffffff;
   &:hover {
     opacity: 1;
   }

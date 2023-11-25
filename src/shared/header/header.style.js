@@ -105,6 +105,12 @@ export const DropDownMenu = styled.ul`
     &:hover {
       background-color: var(--backgroundColor1);
     }
+    > a {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
     > svg {
       width: 3rem;
       height: 3rem;
@@ -122,6 +128,7 @@ export const LogoutButton = styled.button`
   font-size: 2.4rem;
   font-weight: 700;
   width: 100%;
+  height: 100%;
   text-align: left;
   cursor: pointer;
 `;

@@ -6,12 +6,12 @@ import Search from "../search/Search";
 import SelectBtn from "../selectBtn/SelectBtn";
 import WriteBtn from "../wrtieBtn/WriteBtn";
 import * as St from "./newsList.style";
+import { getUserInfo } from "../../../api/firebase";
 
 function NewsList() {
   const [news, setNews] = useState([]);
   const [tag, setTag] = useState("#전체");
   const [searchInput, setSearchInput] = useState("");
-
   const searchFilter =
     news.length !== 0
       ? news.filter((n) => {
@@ -23,7 +23,7 @@ function NewsList() {
       : [];
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       const col = collection(db, "news_feed");
       let querySnapshot;
       if (tag === "#전체") {
@@ -35,19 +35,17 @@ function NewsList() {
         );
         querySnapshot = await getDocs(q);
       }
+      const userInfoList = await getUserInfo();
+      const newsWithUserInfo = await Promise.all(
+        querySnapshot.docs.map(async (doc) => {
+          const { uid } = doc.data();
+          const user = await userInfoList.find(({ uid: _uid }) => _uid === uid);
+          return { id: doc.id, ...doc.data(), ...user };
+        })
+      );
 
-      const initialNews = [];
-      querySnapshot.forEach((doc) => {
-        const data = {
-          id: doc.id,
-          ...doc.data(),
-        };
-        initialNews.push(data);
-      });
-
-      setNews([...initialNews]);
-    };
-    fetchData();
+      setNews([...newsWithUserInfo]);
+    })();
   }, [tag]);
 
   return (
