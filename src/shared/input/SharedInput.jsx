@@ -11,7 +11,15 @@ import { styled } from "styled-components";
  */
 
 function SharedInput({
-  children: { type, value, onChange, placeholder, ref = null, inputType },
+  children: {
+    type,
+    value,
+    onChange,
+    placeholder,
+    ref = null,
+    inputType,
+    $error,
+  },
 }) {
   return (
     <StInput
@@ -20,6 +28,7 @@ function SharedInput({
       onChange={(e) => onChange(e, inputType)}
       placeholder={placeholder}
       ref={ref}
+      $error={$error}
     />
   );
 }
@@ -27,13 +36,16 @@ const StInput = styled.input`
   padding: 1rem 2rem;
   box-sizing: border-box;
   background-color: var(--backgroundColor1);
-  border: 0.2rem solid gray;
+  border: 0.2rem solid
+    ${({ $error }) => ($error ? "#e84118" : "rgba(0, 0, 0, 0)")};
+
   color: var(--textColor);
   border-radius: 0.5rem;
   outline: none;
   transition: border-color 0.3s ease-in;
   &:focus {
-    border-color: var(--primaryColor);
+    border-color: ${({ $error }) =>
+      $error ? "#e84118" : "var(--primaryColor)"};
   }
 `;
 export default SharedInput;

@@ -1,7 +1,7 @@
 /**
  * 입력시 빈값 체크 함수
  * @param  {...any} value 체크할 값들을 받아 배열로 만듦
- * @returns {result: boolean, index: number}
+ * @returns {{result: boolean, index: number}}
  */
 export const checkValidation = (...value) => {
   let result = { result: false, index: 0 };

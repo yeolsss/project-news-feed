@@ -1,24 +1,37 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useRoot } from "../../../../context/root.context";
 import SharedInput from "../../../../shared/input/SharedInput";
 import profileImg from "../../../detail/assets/profileImg.jpg";
 import * as St from "./myInfo.style";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { storage } from "../../../../common/firebase";
 
-function MyInfo({ isEditing, editedMyInfo, handleChangeEditText, refGroup }) {
+function MyInfo({
+  imgFile,
+  isEditing,
+  editedMyInfo,
+  handleChangeEditText,
+  refGroup,
+  setImgFile,
+  validDataStates,
+}) {
   const DEFAULT_AVATAR = profileImg;
   const { userInfo } = useRoot();
   const { uid, name, nickname, image_path } = userInfo;
 
-  const [imgFile, setImgFile] = useState(image_path);
   const imgRef = useRef();
 
-  const saveImgFile = () => {
-    const file = imgRef.current.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImgFile(reader.result);
-    };
+  const saveImgFile = async () => {
+    try {
+      const file = imgRef.current.files[0];
+      const filePath = `${uid}/${file.name}`;
+      const imageRef = ref(storage, filePath);
+      await uploadBytes(imageRef, file);
+      const downloadURL = await getDownloadURL(imageRef);
+      setImgFile(downloadURL);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <>
@@ -27,14 +40,7 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText, refGroup }) {
           <>
             <St.MyName>{editedMyInfo.name}</St.MyName>
             <St.MyProfileImg>
-              <img
-                src={
-                  editedMyInfo.image_path
-                    ? editedMyInfo.image_path
-                    : DEFAULT_AVATAR
-                }
-                alt={"이미지"}
-              />
+              <img src={imgFile ? imgFile : DEFAULT_AVATAR} alt={"이미지"} />
             </St.MyProfileImg>
             <St.MyNickName>{editedMyInfo.nickname}</St.MyNickName>
           </>
@@ -48,14 +54,13 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText, refGroup }) {
                 placeholder: "이름을 입력해주세요",
                 ref: refGroup.name,
                 inputType: "name",
+                $error: validDataStates.name,
               }}
             </SharedInput>
             <form style={{ display: "flex" }}>
               <St.EditingMyProfileImg htmlFor="profileImg">
                 <St.EditedMyProfileImg
-                  src={
-                    editedMyInfo.imgFile ? editedMyInfo.imgFile : DEFAULT_AVATAR
-                  }
+                  src={imgFile ? imgFile : DEFAULT_AVATAR}
                   alt="profile-img"
                 />
               </St.EditingMyProfileImg>
@@ -75,6 +80,7 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText, refGroup }) {
                 placeholder: "닉네임을 입력해주세요",
                 ref: refGroup.nickname,
                 inputType: "nickname",
+                $error: validDataStates.nickname,
               }}
             </SharedInput>
           </>
