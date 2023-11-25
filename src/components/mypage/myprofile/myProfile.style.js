@@ -32,6 +32,8 @@ export const MyInfoModifyButton = styled.button`
   border: none;
   color: white;
   transition: 0.2s;
+  font-size: 1.6rem;
+  font-weight: 700;
   &:hover {
     cursor: pointer;
     opacity: 0.7;

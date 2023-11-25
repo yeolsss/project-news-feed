@@ -1,28 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useLoginContext } from "../../../context/login.context";
+import { useRoot } from "../../../context/root.context";
 import * as St from "./myProfile.style";
 import MyGreeting from "./mygreeting/MyGreeting";
 import MyInfo from "./myinfo/MyInfo";
-import { useRoot } from "../../../context/root.context";
-import { useLoginContext } from "../../../context/login.context";
 
 function MyProfile() {
   const { userInfo, isLogin } = useRoot();
   const { loginChecked } = useLoginContext();
-  const { uid, email, name, nickname, greeting } = userInfo;
+  const { uid, email, name, nickname, greeting, image_path } = userInfo;
 
   // 기본 데이터
-  const TestData = {
-    uid: "1",
-    name: "이하빈",
-    imgStorage: "😉",
-    nickname: "I Like MILK",
-    greeting: "안녕하세요 반가워요 잘 부탁드립니다.",
+  const userData = {
+    uid,
+    email,
+    name,
+    nickname,
+    image_path,
+    greeting,
+  };
+
+  const refGroup = {
+    name: useRef(null),
+    nickname: useRef(null),
+    greeting: useRef(null),
   };
 
   // 수정중일때
   const [isEditing, setIsEditing] = useState(false);
   // 기본 데이터 가져옴
-  const [editedMyInfo, setEditedMyInfo] = useState(TestData);
+  const [editedMyInfo, setEditedMyInfo] = useState(userData);
   // 회원정보 수정 버튼 이벤트
   const handleOnClickMyInfoModify = () => {
     setIsEditing((prev) => !prev);
@@ -47,6 +54,7 @@ function MyProfile() {
         isEditing={isEditing}
         handleChangeEditText={handleChangeEditText}
         editedMyInfo={editedMyInfo}
+        refGroup={refGroup}
       />
       <St.MyGreetingAndButtonBox>
         <MyGreeting

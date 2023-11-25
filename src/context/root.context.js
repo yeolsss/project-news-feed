@@ -12,7 +12,7 @@ const initialState = {
     uid: "",
     name: "",
     nickname: "",
-    imgStorage: "",
+    image_path: "",
     greeting: "",
     getTags: () => {},
   },
@@ -55,7 +55,7 @@ export function RootProvider({ children }) {
               uid,
               name: docSnap.data().name,
               nickname: docSnap.data().nickname,
-              imgStorage: docSnap.data().imgStorage,
+              image_path: docSnap.data().image_path,
               greeting: docSnap.data().greeting,
             });
           } else {

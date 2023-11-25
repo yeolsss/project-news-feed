@@ -17,7 +17,7 @@ function Write() {
   const [image, setImage] = useState(null);
   const [tag, setTag] = useState("");
   const { userInfo } = useRoot();
-  const { uid, name, nickname, email, imgStorage } = userInfo;
+  const { uid, name, nickname, email, image_path } = userInfo;
 
   const navigate = useNavigate();
 

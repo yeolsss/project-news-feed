@@ -64,16 +64,6 @@ export const MyNickName = styled.div`
   line-height: 170%;
 `;
 
-export const MyNameEditingInput = styled.textarea`
-  width: 96%;
-  height: 15.5%;
-  margin-bottom: 0.5rem;
-  background-color: var(--backgroundColor1);
-  color: var(--textColor);
-  border-radius: 0.5rem;
-  resize: none;
-`;
-
 export const ProfileImgInput = styled.input`
   display: none;
 `;

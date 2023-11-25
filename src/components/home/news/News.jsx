@@ -5,8 +5,6 @@ import profileImg from "../assets/profileImg.jpg";
 import * as St from "./news.style";
 
 function News({ news, setNews, searchFilter }) {
-  const { userInfo } = useRoot();
-  const { nickname, imgStorage } = userInfo;
   const { tags } = useRoot();
 
   const tagFiltered = news.filter((n) => {
@@ -34,14 +32,10 @@ function News({ news, setNews, searchFilter }) {
           >
             <St.StProfileArea>
               <St.ProfileImg
-                src={
-                  news.user.image_path !== ""
-                    ? news.user.image_path
-                    : profileImg
-                }
+                src={news.image_path !== "" ? news.image_path : profileImg}
               />
               <div>
-                <St.Name>{news.user.nickname}</St.Name>
+                <St.Name>{news.nickname}</St.Name>
                 <St.Time>{news.created_at}</St.Time>
               </div>
             </St.StProfileArea>

@@ -40,7 +40,7 @@ function NewsList() {
         querySnapshot.docs.map(async (doc) => {
           const { uid } = doc.data();
           const user = await userInfoList.find(({ uid: _uid }) => _uid === uid);
-          return { id: doc.id, ...doc.data(), user };
+          return { id: doc.id, ...doc.data(), ...user };
         })
       );
 
