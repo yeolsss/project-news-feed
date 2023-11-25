@@ -1,10 +1,10 @@
 // initial state 설정
 import { createContext, useContext, useEffect } from "react";
-import { useRoot } from "./root.context";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { openLoginModal } from "../redux/slice/loginModal.slice";
 import { setLoading } from "../redux/slice/loadingModal.slice";
+import { openLoginModal } from "../redux/slice/loginModal.slice";
+import { useRoot } from "./root.context";
 
 const initialState = {
   loginCheck: () => {},
@@ -16,8 +16,8 @@ export const LoginContext = createContext(initialState);
 export function LoginProvider({ children }) {
   const navigate = useNavigate();
   // root context
-  const { isLogin } = useRoot();
-
+  const { isLogin, userInfo } = useRoot();
+  const { uid } = userInfo;
   // login reducer
   const dispatch = useDispatch();
 
@@ -27,12 +27,10 @@ export function LoginProvider({ children }) {
       dispatch(setLoading(true));
       return;
     }
-    // 이 부분 비동기 처리
     if (!isLogin) {
       dispatch(openLoginModal());
       navigate("/");
     }
-    dispatch(setLoading(false));
   };
 
   useEffect(() => {
