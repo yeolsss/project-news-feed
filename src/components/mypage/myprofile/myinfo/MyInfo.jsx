@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useRoot } from "../../../../context/root.context";
-import ShardInput from "../../../../shared/input/ShardInput";
+import SharedInput from "../../../../shared/input/SharedInput";
 import profileImg from "../../../detail/assets/profileImg.jpg";
 import * as St from "./myInfo.style";
 
@@ -40,7 +40,7 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText, refGroup }) {
           </>
         ) : (
           <>
-            <ShardInput>
+            <SharedInput>
               {{
                 type: "text",
                 value: editedMyInfo.name,
@@ -49,7 +49,7 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText, refGroup }) {
                 ref: refGroup.name,
                 inputType: "name",
               }}
-            </ShardInput>
+            </SharedInput>
             <form style={{ display: "flex" }}>
               <St.EditingMyProfileImg htmlFor="profileImg">
                 <St.EditedMyProfileImg
@@ -67,7 +67,7 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText, refGroup }) {
                 ref={imgRef}
               />
             </form>
-            <ShardInput>
+            <SharedInput>
               {{
                 type: "text",
                 value: editedMyInfo.nickname,
@@ -76,7 +76,7 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText, refGroup }) {
                 ref: refGroup.nickname,
                 inputType: "nickname",
               }}
-            </ShardInput>
+            </SharedInput>
           </>
         )}
       </St.MyInfoContainer>

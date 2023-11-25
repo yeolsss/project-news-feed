@@ -5,7 +5,10 @@ export const MyInfoContainer = styled.section`
   width: 25%;
   height: 90%;
   font-size: 2rem;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const MyName = styled.div`
