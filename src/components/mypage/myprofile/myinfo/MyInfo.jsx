@@ -25,21 +25,25 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText, refGroup }) {
       <St.MyInfoContainer>
         {!isEditing ? (
           <>
-            <St.MyName>{name}</St.MyName>
+            <St.MyName>{editedMyInfo.name}</St.MyName>
             <St.MyProfileImg>
               <img
-                src={image_path ? image_path : DEFAULT_AVATAR}
+                src={
+                  editedMyInfo.image_path
+                    ? editedMyInfo.image_path
+                    : DEFAULT_AVATAR
+                }
                 alt={"이미지"}
               />
             </St.MyProfileImg>
-            <St.MyNickName>{nickname}</St.MyNickName>
+            <St.MyNickName>{editedMyInfo.nickname}</St.MyNickName>
           </>
         ) : (
           <>
             <ShardInput>
               {{
                 type: "text",
-                value: name,
+                value: editedMyInfo.name,
                 onChange: handleChangeEditText,
                 placeholder: "이름을 입력해주세요",
                 ref: refGroup.name,
@@ -49,7 +53,9 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText, refGroup }) {
             <form style={{ display: "flex" }}>
               <St.EditingMyProfileImg htmlFor="profileImg">
                 <St.EditedMyProfileImg
-                  src={imgFile ? imgFile : DEFAULT_AVATAR}
+                  src={
+                    editedMyInfo.imgFile ? editedMyInfo.imgFile : DEFAULT_AVATAR
+                  }
                   alt="profile-img"
                 />
               </St.EditingMyProfileImg>
@@ -64,7 +70,7 @@ function MyInfo({ isEditing, editedMyInfo, handleChangeEditText, refGroup }) {
             <ShardInput>
               {{
                 type: "text",
-                value: nickname,
+                value: editedMyInfo.nickname,
                 onChange: handleChangeEditText,
                 placeholder: "닉네임을 입력해주세요",
                 ref: refGroup.nickname,

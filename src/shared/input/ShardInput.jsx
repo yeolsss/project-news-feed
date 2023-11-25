@@ -10,13 +10,20 @@ import { styled } from "styled-components";
  * inputType: 어떤 input인지 구분하기 위한 값
  */
 function ShardInput({
-  children: { type, value, onChange, placeholder, ref, inputType },
+  children: {
+    type,
+    value,
+    onChange: handleOnChange,
+    placeholder,
+    ref,
+    inputType,
+  },
 }) {
   return (
     <StInput
       type={type}
       value={value}
-      onChange={(e) => onChange(e, inputType)}
+      onChange={(e) => handleOnChange(e, inputType)}
       placeholder={placeholder}
       ref={ref}
     />

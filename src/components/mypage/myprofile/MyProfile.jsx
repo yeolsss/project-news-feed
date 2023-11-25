@@ -30,13 +30,19 @@ function MyProfile() {
   const [isEditing, setIsEditing] = useState(false);
   // 기본 데이터 가져옴
   const [editedMyInfo, setEditedMyInfo] = useState(userData);
+  console.log(editedMyInfo);
   // 회원정보 수정 버튼 이벤트
   const handleOnClickMyInfoModify = () => {
     setIsEditing((prev) => !prev);
   };
   // text에 들어가는 값 가져오기
-  const handleChangeEditText = (e) => {
-    setEditedMyInfo(e.target.value);
+  const handleChangeEditText = (e, type) => {
+    setEditedMyInfo((prev) => {
+      return {
+        ...prev,
+        [type]: e.target.value,
+      };
+    });
   };
   // !수정완료 버튼 이벤트 - 데이터 어떻게 바꿔야할지 모르겠습니다..
   const handleOnClickModifyIsDone = () => {
