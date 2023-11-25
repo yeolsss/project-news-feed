@@ -4,19 +4,24 @@ import { useRoot } from "../../../context/root.context";
 import profileImg from "../assets/profileImg.jpg";
 import * as St from "./news.style";
 
-function News({ news, setNews, searchFilter }) {
+function News({ news, setNews, searchFilter, callerType }) {
   const { tags } = useRoot();
 
-  const tagFiltered = news.filter((n) => {
-    if (tags === "#전체") {
-      return news;
-    } else {
-      const filter = n.tag_name_list.filter((item) => tags.includes(item));
-      return tags.includes(...filter);
-    }
-  });
-  const filterNews = searchFilter || tagFiltered;
+  let tagFiltered;
+  if (callerType === "newList") {
+    tagFiltered = news.filter((n) => {
+      if (tags === "#전체") {
+        return news;
+      } else {
+        const filter = n.tag_name_list.filter((item) => tags.includes(item));
+        return tags.includes(...filter);
+      }
+    });
+  }
 
+  const filterNews =
+    callerType === "newList" ? searchFilter || tagFiltered : news;
+  console.log(filterNews);
   const navigate = useNavigate();
   return (
     <>

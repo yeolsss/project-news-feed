@@ -1,10 +1,10 @@
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useRef } from "react";
+import { storage } from "../../../../common/firebase";
 import { useRoot } from "../../../../context/root.context";
 import SharedInput from "../../../../shared/input/SharedInput";
 import profileImg from "../../../detail/assets/profileImg.jpg";
 import * as St from "./myInfo.style";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "../../../../common/firebase";
 
 function MyInfo({
   imgFile,
@@ -17,7 +17,7 @@ function MyInfo({
 }) {
   const DEFAULT_AVATAR = profileImg;
   const { userInfo } = useRoot();
-  const { uid, name, nickname, image_path } = userInfo;
+  const { uid } = userInfo;
 
   const imgRef = useRef();
 

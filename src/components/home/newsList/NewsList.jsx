@@ -10,6 +10,7 @@ import { getUserInfo } from "../../../api/firebase";
 
 function NewsList() {
   const [news, setNews] = useState([]);
+
   const [tag, setTag] = useState("#전체");
   const [searchInput, setSearchInput] = useState("");
   const searchFilter =
@@ -55,7 +56,12 @@ function NewsList() {
       <St.Container>
         <SelectBtn handleTags={{ tag, setTag }} />
         <St.List>
-          <News news={news} setNews={setNews} searchFilter={searchFilter} />
+          <News
+            news={news}
+            setNews={setNews}
+            searchFilter={searchFilter}
+            callerType={"newList"}
+          />
         </St.List>
 
         <WriteBtn />

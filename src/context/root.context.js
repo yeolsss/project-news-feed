@@ -29,7 +29,6 @@ export function RootProvider({ children }) {
   const [isLogin, setIsLogin] = useState(undefined);
   const [userInfo, setUser] = useState({});
   const [tags, setTags] = useState([]);
-
   const getTags = async () => {
     // taglist 호출
     const fireStoreTags = await getDocs(collection(db, "tags"));
@@ -44,23 +43,21 @@ export function RootProvider({ children }) {
       if (user) {
         const { email, uid } = user;
         // 사용자가 로그인한 상태
-        setIsLogin(true);
         // 로그인 한 사용자 이름 가져와
-        setUser({ email, uid });
-
         const docSnap = await getDoc(doc(db, "user_info", uid));
 
         if (docSnap.exists()) {
-          setUser({
+          const tempUserInfo = {
             email,
             uid,
             name: docSnap.data().name,
             nickname: docSnap.data().nickname,
             image_path: docSnap.data().image_path,
             greeting: docSnap.data().greeting,
-          });
+          };
+          setUser({ ...tempUserInfo });
+          setIsLogin(true);
         } else {
-          // doc.data() will be undefined in this case
           console.log("No such document!");
         }
       } else {
