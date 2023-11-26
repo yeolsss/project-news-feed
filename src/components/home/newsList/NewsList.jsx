@@ -10,7 +10,6 @@ import { getUsersInfo } from "../../../api/firebase";
 
 function NewsList() {
   const [news, setNews] = useState([]);
-
   const [tag, setTag] = useState("#전체");
   const [searchInput, setSearchInput] = useState("");
   const searchFilter =
