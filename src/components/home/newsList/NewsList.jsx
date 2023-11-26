@@ -6,11 +6,10 @@ import Search from "../search/Search";
 import SelectBtn from "../selectBtn/SelectBtn";
 import WriteBtn from "../wrtieBtn/WriteBtn";
 import * as St from "./newsList.style";
-import { getUserInfo } from "../../../api/firebase";
+import { getUsersInfo } from "../../../api/firebase";
 
 function NewsList() {
   const [news, setNews] = useState([]);
-
   const [tag, setTag] = useState("#전체");
   const [searchInput, setSearchInput] = useState("");
   const searchFilter =
@@ -38,7 +37,7 @@ function NewsList() {
         );
       }
       querySnapshot = await getDocs(q);
-      const userInfoList = await getUserInfo();
+      const userInfoList = await getUsersInfo();
       const newsWithUserInfo = await Promise.all(
         querySnapshot.docs.map(async (doc) => {
           const { uid } = doc.data();
@@ -53,7 +52,6 @@ function NewsList() {
 
   return (
     <>
-      {/* TODO: 검색 */}
       <Search searchInput={searchInput} setSearchInput={setSearchInput} />
       <St.Container>
         <SelectBtn handleTags={{ tag, setTag }} />

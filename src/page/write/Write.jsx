@@ -11,10 +11,11 @@ import Registeration from "../../components/registeration/Registeration";
 import { useRoot } from "../../context/root.context";
 import { WriteContainer } from "./write.style";
 
+const COLLECTION_REFERENCE = collection(db, "tags");
+
 function Write() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState(null);
   const [tag, setTag] = useState("");
   const { userInfo } = useRoot();
   const { uid, name, nickname, email, image_path } = userInfo;
@@ -29,20 +30,20 @@ function Write() {
   // 등록
   const handleRegister = async () => {
     try {
-      const fireStoreTags = await getDocs(collection(db, "tags"));
+      const fireStoreTags = await getDocs(COLLECTION_REFERENCE);
       const tempTagsArr = [];
       fireStoreTags.forEach((doc) => {
         tempTagsArr.push(doc.data().tag_name);
       });
 
       // tag 있는지 확인
-      tag.split(",").forEach(async (tag) => {
-        if (!tempTagsArr.join("").includes(tag.trim())) {
-          // 없으면 tags firestore에 추가해11
-          await addDoc(collection(db, "tags"), { tag_name: tag });
-          return;
+      for (const tag1 of tag.split(",")) {
+        if (!tempTagsArr.join("").includes(tag1.trim())) {
+          // 없으면 tags firestore에 추가해
+          await addDoc(COLLECTION_REFERENCE, { tag_name: tag1 });
         }
-      });
+      }
+
       addDoc(collection(db, "news_feed"), {
         title: title,
         content: content.replaceAll("\n", "<br>"),
@@ -54,7 +55,6 @@ function Write() {
       }).then((response) => {
         setTitle("");
         setContent("");
-        setImage(null);
         setTag([]);
         alert("글이 등록되었습니다.");
         navigate(`/detail/${response.id}`);
