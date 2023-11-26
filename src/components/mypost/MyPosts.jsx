@@ -8,7 +8,7 @@ import * as St from "./mypost.style";
 const MyPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
   const { userInfo } = useRoot();
-  const { uid } = userInfo;
+  const { uid, name, nickname, image_path } = userInfo;
 
   useEffect(() => {
     if (uid) {
@@ -20,6 +20,9 @@ const MyPosts = () => {
           posts.push({
             id: doc.id,
             ...doc.data(),
+            name,
+            nickname,
+            image_path,
           });
         });
         setUserPosts(posts);
