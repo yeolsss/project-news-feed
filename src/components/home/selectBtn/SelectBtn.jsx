@@ -11,8 +11,12 @@ function SelectBtn({ handleTags: { tag, setTag } }) {
   return (
     <St.BtnContainer onClick={onActiveTag}>
       <St.SelectBtn $activeTag={tag}>#전체</St.SelectBtn>
-      {tags.map((t) => {
-        return <St.SelectBtn $activeTag={tag}>{t.tag_name}</St.SelectBtn>;
+      {tags.map((t, index) => {
+        return (
+          <St.SelectBtn key={t + index} $activeTag={tag}>
+            {t.tag_name}
+          </St.SelectBtn>
+        );
       })}
     </St.BtnContainer>
   );

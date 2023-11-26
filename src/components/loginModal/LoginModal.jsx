@@ -12,6 +12,7 @@ import { closeLoginModal } from "../../redux/slice/loginModal.slice";
 import { Input } from "../common/Inputs";
 import JoinHeader from "../joinHeader/JoinHeader";
 import { JoinButton } from "../joinMan/joinMain.style";
+import SocialLoginButton from "../social/SocialLoginButton";
 import * as St from "./loginModal.style";
 
 function LoginModal() {
@@ -130,8 +131,7 @@ function LoginModal() {
             <JoinButton>로그인</JoinButton>
           </St.LoginForm>
           <div>
-            <Button text={"google Login"} />
-            <Button text={"github Login"} />
+            <SocialLoginButton />
           </div>
         </div>
         <St.ModalCloseButton
@@ -145,7 +145,3 @@ function LoginModal() {
 }
 
 export default LoginModal;
-
-export const Button = ({ text }) => {
-  return <St.SnsButton>{text}</St.SnsButton>;
-};

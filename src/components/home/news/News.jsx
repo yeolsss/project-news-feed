@@ -21,7 +21,6 @@ function News({ news, setNews, searchFilter, callerType }) {
 
   const filterNews =
     callerType === "newList" ? searchFilter || tagFiltered : news;
-  console.log(filterNews);
   const navigate = useNavigate();
   return (
     <>
@@ -49,7 +48,9 @@ function News({ news, setNews, searchFilter, callerType }) {
               <div>
                 <St.Title>{news.title}</St.Title>
                 {news.content.length < 200 ? (
-                  <St.Content>{news.content}</St.Content>
+                  <St.Content>
+                    {news.content.replaceAll("<br>", "\n")}
+                  </St.Content>
                 ) : (
                   <St.Content>
                     {news.content.slice(0, 200)}

@@ -6,14 +6,17 @@ import { useRoot } from "../../context/root.context";
 import { openLoginModal } from "../../redux/slice/loginModal.slice";
 import { themeSelector, toggleTheme } from "../../redux/slice/theme.slice";
 
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  selectDropDownMenu,
+  toggleDropDownMenu,
+} from "../../redux/slice/dropDown.slice";
 import * as St from "./header.style";
 
 function Header() {
   const dispatch = useDispatch();
   const { theme } = useSelector(themeSelector);
-  const [isDropDown, setIsDropDown] = useState(false);
+  const selectorDropDown = useSelector(selectDropDownMenu);
   // 요놈 가져다 쓰면 로그인 됐는지 알 수 있다.
   const { isLogin, logout, userInfo } = useRoot();
 
@@ -32,7 +35,8 @@ function Header() {
   };
 
   const handelOnClickDropDown = () => {
-    setIsDropDown(!isDropDown);
+    console.log(selectorDropDown);
+    dispatch(toggleDropDownMenu(!selectorDropDown));
   };
 
   const handleOnClickLogout = () => {
@@ -68,7 +72,7 @@ function Header() {
             <St.HeaderButton onClick={handelOnClickDropDown}>
               <FaUserNinja />
             </St.HeaderButton>
-            <St.DropDownMenu $isDropDown={isDropDown}>
+            <St.DropDownMenu $isDropDown={selectorDropDown}>
               <li>
                 <Link to="/my-page">마이페이지</Link>
                 <FaHouseUser />

@@ -1,7 +1,8 @@
 // initial state 설정
 import { createContext, useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { toggleDropDownMenu } from "../redux/slice/dropDown.slice";
 import { setLoading } from "../redux/slice/loadingModal.slice";
 import { openLoginModal } from "../redux/slice/loginModal.slice";
 import { useRoot } from "./root.context";
@@ -15,9 +16,9 @@ export const LoginContext = createContext(initialState);
 
 export function LoginProvider({ children }) {
   const navigate = useNavigate();
+  const params = useParams();
   // root context
   const { isLogin, userInfo } = useRoot();
-  const { uid } = userInfo;
   // login reducer
   const dispatch = useDispatch();
 
@@ -32,6 +33,10 @@ export function LoginProvider({ children }) {
       navigate("/");
     }
   };
+
+  useEffect(() => {
+    dispatch(toggleDropDownMenu(false));
+  }, [params]);
 
   useEffect(() => {
     loginChecked();

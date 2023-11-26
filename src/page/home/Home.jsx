@@ -3,6 +3,7 @@ import NewsList from "../../components/home/newsList/NewsList";
 
 //import SelectBtn from "../../components/home/selectBtn/SelectBtn";
 import * as St from "./home.style";
+
 function Home() {
   return (
     <St.HomeContainer>

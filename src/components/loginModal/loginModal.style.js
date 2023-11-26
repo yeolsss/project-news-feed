@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
-import { JoinButton } from "../joinMan/joinMain.style";
 export const LoginModalWrapper = styled.div`
   width: 100vw;
   height: 100vh;
@@ -45,12 +44,6 @@ export const LoginForm = styled.form`
 export const JoinLink = styled(Link)`
   color: var(--textColor1);
   font-size: 1.6rem;
-`;
-
-export const SnsButton = styled(JoinButton)`
-  background-color: var(--backgroundColor2);
-  font-weight: 700;
-  color: var(--textColor1);
 `;
 
 export const ModalCloseButton = styled.div`
