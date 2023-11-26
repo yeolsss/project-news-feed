@@ -58,6 +58,6 @@ const news = document.getElementById("itNews");
 
 - 이하빈: https://github.com/Liabinn
 - 권경열: https://github.com/yeolsss
-- 김건우: https://github.com/doodookim?tab=repositories
+- 김건우: https://github.com/doodookim
 - 정혜원: https://github.com/hyewon0615
 - 주형준: https://github.com/junny092597
