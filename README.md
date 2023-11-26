@@ -1,6 +1,6 @@
 # 프로젝트 이름
 
-const news = document.getElementById("itNews");
+(const news = document.getElementById("itNews");)[https://www.new-it.store/]
 
 ## 🖥️ 프로젝트 소개
 
