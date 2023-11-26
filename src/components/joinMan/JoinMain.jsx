@@ -48,6 +48,35 @@ function JoinMain() {
   // router-dom
   const navigate = useNavigate();
 
+  // input object
+  const inputList = [
+    {
+      placeholder: "이메일 주소",
+      valueType: "id",
+      type: "text",
+      ref: useRef(null),
+    },
+    {
+      placeholder: "비밀번호",
+      valueType: "password",
+      type: "password",
+      ref: useRef(null),
+    },
+    {
+      placeholder: "비밀번호 확인",
+      valueType: "passwordCheck",
+      type: "password",
+      ref: useRef(null),
+    },
+    { placeholder: "이름", valueType: "name", type: "text", ref: useRef(null) },
+    {
+      placeholder: "닉네임",
+      valueType: "nickname",
+      type: "text",
+      ref: useRef(null),
+    },
+  ];
+
   const { mutate } = useMutation(setUser, {
     onMutate: () => {
       dispatch(setLoading(true));
@@ -156,7 +185,19 @@ function JoinMain() {
     <St.JoinMainSection>
       <form onSubmit={handleOnSubmitJoin}>
         <St.JoinMainInputGroup>
-          <Input
+          {inputList.map((item, index) => (
+            <Input
+              key={item + index + ""}
+              type={item.type}
+              placeholder={item.placeholder}
+              value={joinStates[item.valueType]}
+              inputRef={item.ref}
+              onChange={(e) => handleOnChangeInput(e, item.valueType)}
+              inputType={item.type}
+              $error={validDataStates[item.type]}
+            />
+          ))}
+          {/*<Input
             type={"text"}
             placeholder={"이메일 주소"}
             value={joinStates.id}
@@ -200,7 +241,7 @@ function JoinMain() {
             onChange={handleOnChangeInput}
             inputType={"nickname"}
             $error={validDataStates.nickname}
-          />
+          />*/}
         </St.JoinMainInputGroup>
         <St.JoinInfoSection>
           <St.JoinInfoDiv>
