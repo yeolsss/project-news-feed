@@ -134,9 +134,23 @@ export const GlobalStyles = styled.createGlobalStyle`
     border-spacing: 0;
   }
 
+  div,
+  section,
+  footer,
+  header,
+  article,
+  aside,
+  nav {
+    box-sizing: border-box;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
+  }
+  button {
+    border: none;
+    background-color: none;
   }
 
   /* typography */
@@ -162,8 +176,16 @@ export const GlobalStyles = styled.createGlobalStyle`
     transition:
       background-color 0.3s ease-in,
       color 0.3s ease-in;
+    position: relative;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
   #root {
     width: 100%;
+    height: 100vh;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;

@@ -11,7 +11,6 @@ export const themeSlice = createSlice({
   initialState,
   reducers: {
     toggleTheme: (state) => {
-      console.log(state.theme);
       state.theme = !state.theme;
       localStorage.setItem(THEME_KEY, JSON.stringify(state.theme));
     },
