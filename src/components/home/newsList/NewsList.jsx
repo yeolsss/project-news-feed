@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../../common/firebase";
 import News from "../news/News";
@@ -27,15 +27,17 @@ function NewsList() {
     (async () => {
       const col = collection(db, "news_feed");
       let querySnapshot;
+      let q;
       if (tag === "#전체") {
-        querySnapshot = await getDocs(col);
+        q = query(col, orderBy("created_at", "desc"));
       } else {
-        const q = query(
+        q = query(
           col,
-          where("tag_name_list", "array-contains-any", [tag])
+          where("tag_name_list", "array-contains-any", [tag]),
+          orderBy("created_at", "desc")
         );
-        querySnapshot = await getDocs(q);
       }
+      querySnapshot = await getDocs(q);
       const userInfoList = await getUserInfo();
       const newsWithUserInfo = await Promise.all(
         querySnapshot.docs.map(async (doc) => {
