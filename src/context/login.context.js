@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toggleDropDownMenu } from "../redux/slice/dropDown.slice";
 import { setLoading } from "../redux/slice/loadingModal.slice";
-import { openLoginModal } from "../redux/slice/loginModal.slice";
 import { useRoot } from "./root.context";
 
 const initialState = {
@@ -29,7 +28,7 @@ export function LoginProvider({ children }) {
       return;
     }
     if (!isLogin) {
-      dispatch(openLoginModal());
+      // dispatch(openLoginModal());
       navigate("/");
     }
   };
