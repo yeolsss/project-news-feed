@@ -1,7 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth, db } from "../common/firebase";
+import { getUserInfo } from "../api/firebase";
 
 // context 초기화
 const initialState = {
@@ -44,16 +45,16 @@ export function RootProvider({ children }) {
         const { email, uid } = user;
         // 사용자가 로그인한 상태
         // 로그인 한 사용자 이름 가져와
-        const docSnap = await getDoc(doc(db, "user_info", uid));
+        const getUserInfoData = await getUserInfo(uid);
 
-        if (docSnap.exists()) {
+        if (getUserInfoData.exists()) {
           const tempUserInfo = {
             email,
             uid,
-            name: docSnap.data().name,
-            nickname: docSnap.data().nickname,
-            image_path: docSnap.data().image_path,
-            greeting: docSnap.data().greeting,
+            name: getUserInfoData.data().name,
+            nickname: getUserInfoData.data().nickname,
+            image_path: getUserInfoData.data().image_path,
+            greeting: getUserInfoData.data().greeting,
           };
           setUser({ ...tempUserInfo });
           setIsLogin(true);

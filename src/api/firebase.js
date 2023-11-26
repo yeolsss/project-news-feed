@@ -3,7 +3,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "../common/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 /**
  * firebase signup function
@@ -35,7 +35,7 @@ export const loginFirebase = (loginData) => {
  * 전체 회원 조회
  * 이 데이터로 데이터 출력
  */
-export const getUserInfo = async () => {
+export const getUsersInfo = async () => {
   const userCollection = collection(db, "user_info");
   let userSnapshot;
   try {
@@ -44,4 +44,13 @@ export const getUserInfo = async () => {
     console.error(error);
   }
   return userSnapshot.docs.map((doc) => doc.data());
+};
+
+/**
+ *  uid로 userInfo 검색
+ * @param uid
+ * @returns {Promise<DocumentSnapshot<DocumentData, DocumentData>>}
+ */
+export const getUserInfo = async (uid) => {
+  return await getDoc(doc(db, "user_info", uid));
 };
