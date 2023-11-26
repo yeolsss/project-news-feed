@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../common/firebase";
 import { useRoot } from "../../context/root.context";
 import News from "../home/news/News";
-import * as St from "./myPost.style";
+import * as St from "./mypost.style";
 
 const MyPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
