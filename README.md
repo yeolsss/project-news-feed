@@ -47,7 +47,7 @@ const news = document.getElementById("itNews");
 #### 태그 작성
 
 - 글 내 태그 등록 및 검색 가능
--
+
  ## 🖥️ 미리보기
  
   <img alt="회원가입" src = "https://ifh.cc/g/JKVkAc.png" width="500px" height="500px">  <img alt="로그인화면" src = "https://ifh.cc/g/a44LTf.png" width="500px" height="500px">  
