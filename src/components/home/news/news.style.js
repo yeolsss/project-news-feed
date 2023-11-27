@@ -36,6 +36,7 @@ export const Content = styled.div`
   font-size: 1.5rem;
   margin: 1rem;
   line-height: 140%;
+  white-space: pre-wrap;
 `;
 
 export const NewsArea = styled.div`
