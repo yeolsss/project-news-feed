@@ -53,7 +53,7 @@ function News({ news, setNews, searchFilter, callerType }) {
                   </St.Content>
                 ) : (
                   <St.Content>
-                    {news.content.slice(0, 200)}
+                    {news.content.replaceAll("<br>", "\n").slice(0, 200)}
                     <St.SeeMore>...더보기</St.SeeMore>
                   </St.Content>
                 )}
