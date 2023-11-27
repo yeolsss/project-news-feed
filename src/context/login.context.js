@@ -1,10 +1,11 @@
 // initial state 설정
 import { createContext, useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toggleDropDownMenu } from "../redux/slice/dropDown.slice";
 import { setLoading } from "../redux/slice/loadingModal.slice";
 import { useRoot } from "./root.context";
+import { openLoginModal } from "../redux/slice/loginModal.slice";
 
 const initialState = {
   loginCheck: () => {},
@@ -16,6 +17,9 @@ export const LoginContext = createContext(initialState);
 export function LoginProvider({ children }) {
   const navigate = useNavigate();
   const params = useParams();
+  const { pathname } = useLocation();
+  const isLoginCheck = pathname !== "/";
+
   // root context
   const { isLogin, userInfo } = useRoot();
   // login reducer
@@ -28,7 +32,8 @@ export function LoginProvider({ children }) {
       return;
     }
     if (!isLogin) {
-      // dispatch(openLoginModal());
+      alert("로그인이 필요합니다.");
+      dispatch(openLoginModal());
       navigate("/");
     }
   };
@@ -38,9 +43,12 @@ export function LoginProvider({ children }) {
   }, [params]);
 
   useEffect(() => {
-    loginChecked();
-    if (isLogin !== undefined) {
-      dispatch(setLoading(false));
+    if (isLoginCheck) {
+      loginChecked();
+
+      if (isLogin !== undefined) {
+        dispatch(setLoading(false));
+      }
     }
   }, [isLogin]);
 
