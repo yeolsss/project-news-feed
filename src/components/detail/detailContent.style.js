@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const Container = styled.div`
   background-color: var(--backgroundColor2);
   width: 80rem;
@@ -55,6 +56,7 @@ export const Content = styled.p`
   line-height: 2.5rem;
   letter-spacing: 0.1rem;
   word-break: break-all;
+  white-space: pre-wrap;
 `;
 export const SelectButton = styled.button`
   padding: 0.5rem 1rem;
