@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as St from "./writeBtn.style";
+
 function WriteBtn() {
   const navigate = useNavigate();
   return (
