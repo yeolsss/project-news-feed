@@ -1,6 +1,6 @@
 # 프로젝트 이름
 
-const news = document.getElementById("itNews");
+[const news = document.getElementById("itNews");](https://www.new-it.store/)
 
 ## 🖥️ 프로젝트 소개
 
@@ -11,12 +11,13 @@ const news = document.getElementById("itNews");
 - 23.11.21 ~ 23.11.26
 
 ### 🧑‍🤝‍🧑 멤버구성
-
-- 팀장 : 이하빈 - 마이페이지: 프로필, 인사말
-- 팀원1 : 권경열 - 메인 페이지: 회원가입 및 로그인, 아이디 중복 확인 기능
-- 팀원2 : 김건우 - CRUD: 글 작성, 수정, 삭제
-- 팀원3 : 정혜원 - CRUD: 글 작성, 수정, 삭제
-- 팀원4 : 주형준 - 마이페이지: 내가 쓴 뉴스
+|구성|이름|역할|
+|------|---|---
+|팀장|이하빈|마이페이지: 프로필, 인사말|
+|부팀장|권경열|메인 페이지: 회원가입 및 로그인, 아이디 중복 확인 기능|
+|팀원|김건우|CRUD: 글 작성, 수정, 삭제|
+|팀원|정혜원|CRUD: 글 작성, 수정, 삭제|
+|팀원|주형준|마이페이지: 내가 쓴 뉴스|
 
 ### ⚙️ 개발 환경
 
@@ -42,10 +43,21 @@ const news = document.getElementById("itNews");
 
 - 원하는 포스트 내용을 작성
 
+
+#### 태그 작성
+
+- 글 내 태그 등록 및 검색 가능
+
+ ## 🖥️ 미리보기
+ 
+  <img alt="회원가입" src = "https://ifh.cc/g/JKVkAc.png" width="500px" height="500px">  <img alt="로그인화면" src = "https://ifh.cc/g/a44LTf.png" width="500px" height="500px">  
+
+  <img alt="메인페이지" src = "https://ifh.cc/g/gAPN0x.png" width="500px" height="500px">   <img alt="글쓰기" src = "https://ifh.cc/g/dshWVz.png" width="500px" height="500px">
+
 ## 🧑‍🤝‍🧑 멤버 정보
 
 - 이하빈: https://github.com/Liabinn
 - 권경열: https://github.com/yeolsss
-- 김건우: https://github.com/doodookim?tab=repositories
+- 김건우: https://github.com/doodookim
 - 정혜원: https://github.com/hyewon0615
 - 주형준: https://github.com/junny092597

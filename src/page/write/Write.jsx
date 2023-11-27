@@ -1,6 +1,6 @@
 // Write.jsx
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../common/firebase";
 import { getDate } from "../../common/util";
@@ -10,6 +10,8 @@ import AddHashtag from "../../components/addhashtag/AddHashtag";
 import Registeration from "../../components/registeration/Registeration";
 import { useRoot } from "../../context/root.context";
 import { WriteContainer } from "./write.style";
+import { useLoginContext } from "../../context/login.context";
+import { useDispatch } from "react-redux";
 
 const COLLECTION_REFERENCE = collection(db, "tags");
 
@@ -17,7 +19,7 @@ function Write() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [tag, setTag] = useState("");
-  const { userInfo } = useRoot();
+  const { userInfo, loginCheck } = useRoot();
   const { uid, name, nickname, email, image_path } = userInfo;
 
   const navigate = useNavigate();
@@ -63,6 +65,13 @@ function Write() {
       console.error("Error 발생", error);
     }
   };
+
+  // 회원일때만 접근
+  const { loginChecked } = useLoginContext();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    loginChecked();
+  }, []);
 
   return (
     <>
